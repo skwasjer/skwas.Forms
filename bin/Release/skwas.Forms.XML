@@ -1,0 +1,1898 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>skwas.Forms</name>
+    </assembly>
+    <members>
+        <member name="T:skwas.Forms.ApplicationStartedEventArgs">
+            <summary>
+            Represents the event arguments for application start up.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.ApplicationStartedEventArgs.#ctor(System.String,System.String[])">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.ApplicationStartedEventArgs"/>.
+            </summary>
+            <param name="cmdLine">The command line string.</param>
+            <param name="args">The parsed command line arguments.</param>
+        </member>
+        <member name="P:skwas.Forms.ApplicationStartedEventArgs.CmdLine">
+            <summary>
+            The raw command line.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.ApplicationStartedEventArgs.Arguments">
+            <summary>
+            The command line arguments.
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.ExtendedWindowStyles">
+            <summary>
+            Describes extended styles associated with a window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.DlgModalFrame">
+            <summary>
+            The window has a double border; the window can, optionally, be created with a title bar by specifying the WS_CAPTION style in the dwStyle parameter.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.NoParentNotify">
+            <summary>
+            The child window created with this style does not send the WM_PARENTNOTIFY message to its parent window when it is created or destroyed.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.TopMost">
+            <summary>
+            The window should be placed above all non-topmost windows and should stay above them, even when the window is deactivated. To add or remove this style, use the SetWindowPos function.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.AcceptFiles">
+            <summary>a
+            The window accepts drag-drop files.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.Transparent">
+            <summary>
+            The window should not be painted until siblings beneath the window (that were created by the same thread) have been painted. The window appears transparent because the bits of underlying sibling windows have already been painted.
+            To achieve transparency without these restrictions, use the SetWindowRgn function.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.MdiChild">
+            <summary>
+            The window is a MDI child window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.ToolWindow">
+            <summary>
+            The window is intended to be used as a floating toolbar. A tool window has a title bar that is shorter than a normal title bar, and the window title is drawn using a smaller font. A tool window does not appear in the taskbar or in the dialog that appears when the user presses ALT+TAB. If a tool window has a system menu, its icon is not displayed on the title bar. However, you can display the system menu by right-clicking or by typing ALT+SPACE.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.WindowEdge">
+            <summary>
+            The window has a border with a raised edge.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.ClientEdge">
+            <summary>
+            The window has a border with a sunken edge.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.ContextHelp">
+            <summary>
+            The title bar of the window includes a question mark. When the user clicks the question mark, the cursor changes to a question mark with a pointer. If the user then clicks a child window, the child receives a WM_HELP message. The child window should pass the message to the parent window procedure, which should call the WinHelp function using the HELP_WM_HELP command. The Help application displays a pop-up window that typically contains help for the child window.
+            WS_EX_CONTEXTHELP cannot be used with the WS_MAXIMIZEBOX or WS_MINIMIZEBOX styles.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.Right">
+            <summary>
+            The window has generic "right-aligned" properties. This depends on the window class. This style has an effect only if the shell language is Hebrew, Arabic, or another language that supports reading-order alignment; otherwise, the style is ignored.
+            Using the WS_EX_RIGHT style for static or edit controls has the same effect as using the SS_RIGHT or ES_RIGHT style, respectively. Using this style with button controls has the same effect as using BS_RIGHT and BS_RIGHTBUTTON styles.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.Left">
+            <summary>
+            The window has generic left-aligned properties. This is the default.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.RtlReading">
+            <summary>
+            If the shell language is Hebrew, Arabic, or another language that supports reading-order alignment, the window text is displayed using right-to-left reading-order properties. For other languages, the style is ignored.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.LtrReading">
+            <summary>
+            The window text is displayed using left-to-right reading-order properties. This is the default.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.LeftScrollbar">
+            <summary>
+            If the shell language is Hebrew, Arabic, or another language that supports reading order alignment, the vertical scroll bar (if present) is to the left of the client area. For other languages, the style is ignored.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.RightScrollbar">
+            <summary>
+            The vertical scroll bar (if present) is to the right of the client area. This is the default.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.ControlParent">
+            <summary>
+            The window itself contains child windows that should take part in dialog box navigation. If this style is specified, the dialog manager recurses into children of this window when performing navigation operations such as handling the TAB key, an arrow key, or a keyboard mnemonic.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.StaticEdge">
+            <summary>
+            The window has a three-dimensional border style intended to be used for items that do not accept user input.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.AppWindow">
+            <summary>
+            Forces a top-level window onto the taskbar when the window is visible.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.OverlappedWindow">
+            <summary>
+            The window is an overlapped window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.PaletteWindow">
+            <summary>
+            The window is palette window, which is a modeless dialog box that presents an array of commands.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.Layered">
+            <summary>
+            The window is a layered window. This style cannot be used if the window has a class style of either CS_OWNDC or CS_CLASSDC.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.NoInheritLayout">
+            <summary>
+            The window does not pass its window layout to its child windows.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.NoRedirectionBitmap">
+            <summary>
+            The window does not render to a redirection surface. This is for windows that do not have visible content or that use mechanisms other than surfaces to provide their visual.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.LayoutRtl">
+            <summary>
+            If the shell language is Hebrew, Arabic, or another language that supports reading order alignment, the horizontal origin of the window is on the right edge. Increasing horizontal values advance to the left.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.Composited">
+            <summary>
+            Paints all descendants of a window in bottom-to-top painting order using double-buffering. For more information, see Remarks. This cannot be used if the window has a class style of either CS_OWNDC or CS_CLASSDC.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ExtendedWindowStyles.NoActivate">
+            <summary>
+            A top-level window created with this style does not become the foreground window when the user clicks it. The system does not bring this window to the foreground when the user minimizes or closes the foreground window.
+            To activate the window, use the SetActiveWindow or SetForegroundWindow function.
+            The window does not appear on the taskbar by default. To force the window to appear on the taskbar, use the WS_EX_APPWINDOW style.
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.ShieldButton">
+            <summary>
+            Represents a button that displays a shield to indicate elevated permissions are required. The shield is only displayed when the user does not have Administrator permissions.
+            </summary>
+            <remarks>Requires the <see cref="P:ShieldButton.FlatStyle"/> to be set to <see cref="F:FlatStyle.System"/></remarks>
+        </member>
+        <member name="M:skwas.Forms.ShieldButton.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.ShieldButton"/>.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.ShieldButton.RequiresElevation">
+            <summary>
+            Gets whether elevation is required for the current principal.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.ShieldButton.OnHandleCreated(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data. </param>
+        </member>
+        <member name="T:skwas.Forms.CommandLine">
+            <summary>
+            Command line arguments helper.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.CommandLine.Parse(System.String)">
+            <summary>
+            Returns the command line arguments in an array.
+            </summary>
+            <param name="commandLine">The raw command line.</param>
+        </member>
+        <member name="M:skwas.Forms.CommandLine.Pack(System.String[])">
+            <summary>
+            Packs an array of command line arguments into a single line. If an argument contains a space, the argument is enclosed in double quotes (").
+            </summary>
+            <param name="args">The command line arguments to pack.</param>
+        </member>
+        <member name="T:skwas.Forms.LocalClipboard">
+            <summary>
+            Represents a clipboard that can be used to store objects that can not be easily serialized to the native clipboard. This clipboard implementation can not be used to store actual data on the clipboard for use in other applications. It does however utilize the native clipboard for managing clipboard state.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.LocalClipboard.LastCaller">
+            <summary>
+            Gets the last caller, usually a form or control. This can be used to track the owner of a particular operation.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.SafeNativeMethods.SetCapture(System.Runtime.InteropServices.HandleRef)">
+            <summary>
+            Sets the mouse capture to the specified window belonging to the current thread.
+            </summary>
+            <param name="hWnd">Handle to the window in the current thread that is to capture the mouse.</param>
+            <returns>Handle to previous window</returns>
+        </member>
+        <member name="T:skwas.Forms.ShowWindow">
+            <summary>
+            Describes methods to show a window with.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.Hide">
+            <summary>
+            Hides the window and activates another window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.ShowNormal">
+            <summary>
+            Activates and displays a window. If the window is minimized or maximized, the system restores it to its original size and position. An application should specify this flag when displaying the window for the first time.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.Normal">
+            <summary>
+            Activates and displays a window. If the window is minimized or maximized, the system restores it to its original size and position. An application should specify this flag when displaying the window for the first time.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.ShowMinimized">
+            <summary>
+            Activates the window and displays it as a minimized window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.ShowMaximized">
+            <summary>
+            Activates the window and displays it as a maximized window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.Maximize">
+            <summary>
+            Maximizes the specified window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.ShowNoActivate">
+            <summary>
+            Displays a window in its most recent size and position. This value is similar to SW_SHOWNORMAL, except the window is not actived.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.Show">
+            <summary>
+            Activates the window and displays it in its current size and position. 
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.Minimize">
+            <summary>
+            Minimizes the specified window and activates the next top-level window in the Z order.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.ShowMinNoActivate">
+            <summary>
+            Displays the window as a minimized window. This value is similar to SW_SHOWMINIMIZED, except the window is not activated.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.ShowNA">
+            <summary>
+            Displays the window in its current size and position. This value is similar to SW_SHOW, except the window is not activated.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.Restore">
+            <summary>
+            Activates and displays the window. If the window is minimized or maximized, the system restores it to its original size and position. An application should specify this flag when restoring a minimized window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.ShowDefault">
+            <summary>
+            Sets the show state based on the SW_ value specified in the STARTUPINFO structure passed to the CreateProcess function by the program that started the application. 
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.ShowWindow.ForceMinimize">
+            <summary>
+            Windows 2000/XP: Minimizes a window, even if the thread that owns the window is not responding. This flag should only be used when minimizing windows from a different thread.
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.SingleApplicationInstance">
+            <summary>
+            Ensure only a single instance of the application can run at any time for the interactive user.
+            </summary>
+            <remarks>
+            When callback notifications from new instances are needed, at least one form must be registered via RegisterForm.
+            </remarks>
+        </member>
+        <member name="F:skwas.Forms.SingleApplicationInstance.CopyDataIdentifier">
+            <summary>
+            An identifier for our custom data format.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.SingleApplicationInstance"/> using specified mutex name and listener form. 
+            </summary>
+            <param name="mutexName">The mutex name. Ensure the name is unique for your application.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the mutex name is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the mutex name is too long or invalid.</exception>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.Finalize">
+            <summary>
+            Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.Dispose(System.Boolean)">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <param name="disposing">True if disposing.</param>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.SingleApplicationInstance.IsAnotherInstanceRunning">
+            <summary>
+            Gets whether another instance is already running.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.GetOtherInstance">
+            <summary>
+            Gets the other running instance, or null if this is the first instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.SwitchTo(System.String[])">
+            <summary>
+            Switch to the main running instance and optionally send data to the main instance.
+            </summary>
+            <param name="args">The command line arguments to pass.</param>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.SendData(System.String[],System.IntPtr)">
+            <summary>
+            Sends a string to a window handle via WM_COPYDATA.
+            </summary>
+            <param name="args">The command line arguments to send.</param>
+            <param name="hwnd">The window handle to send to.</param>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.RegisterForm(System.Windows.Forms.Form)">
+            <summary>
+            Registers a form for receiving a callback notification when another instance was started. This typically should be the main form.
+            </summary>
+            <param name="form">The form to register.</param>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.UnregisterForm(System.Windows.Forms.Form)">
+            <summary>
+            Unregisters a form for receiving a callback notification when another instance was started.
+            </summary>
+            <param name="form">The form to register.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the specified form is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the form is not registered.</exception>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.Form_Disposed(System.Object,System.EventArgs)">
+            <summary>
+            Called when one of the registered forms is disposed.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="E:skwas.Forms.SingleApplicationInstance.ApplicationStarted">
+            <summary>
+            Raised when another application instance has started.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.SingleApplicationInstance.OnApplicationStarted(skwas.Forms.ApplicationStartedEventArgs)">
+            <summary>
+            Raises the <see cref="E:skwas.Forms.SingleApplicationInstance.ApplicationStarted"/> event.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:skwas.Forms.UndoAction">
+            <summary>
+            Represents the base class for a replayable (redo) or revertable (undo) action.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoAction.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.UndoAction"/>.
+            </summary>
+            <param name="affectedInstance">The instance on which this action operates.</param>
+        </member>
+        <member name="M:skwas.Forms.UndoAction.#ctor(System.String,System.Object)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.UndoAction"/>.
+            </summary>
+            <param name="description">A description for the action.</param>
+            <param name="affectedInstance">The instance on which this action operates.</param>
+        </member>
+        <member name="P:skwas.Forms.UndoAction.Description">
+            <summary>
+            Gets a common description.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoAction.UndoDescription">
+            <summary>
+            Gets the undo description.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoAction.RedoDescription">
+            <summary>
+            Gets the redo description.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoAction.AffectedInstance">
+            <summary>
+            Gets the instance on which this action operates.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoAction.Undo">
+            <summary>
+            Performs the undo. Warning: Calling this method directly may cause the undo stack to become corrupted.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoAction.Redo">
+            <summary>
+            Performs the redo. Warning: Calling this method directly may cause the undo stack to become corrupted.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoAction.OnUndo">
+            <summary>
+            Executes the undo action.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoAction.OnRedo">
+            <summary>
+            Executes the redo action.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoAction.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="T:skwas.Forms.UndoEventArgs">
+            <summary>
+            Represents the event arguments for an undo/redo action.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoEventArgs.#ctor(skwas.Forms.UndoAction)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.UndoEventArgs"/>.
+            </summary>
+            <param name="undoAction">The undo action.</param>
+        </member>
+        <member name="P:skwas.Forms.UndoEventArgs.Action">
+            <summary>
+            Gets the undo action.
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.UndoManager">
+            <summary>
+            Represents a undo/redo action manager.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.UndoManager.LockObject">
+            <summary>
+            Used to prevent modification of the redo/undo stack while processing an undo/redo action.
+            </summary>
+        </member>
+        <member name="E:skwas.Forms.UndoManager.Changed">
+            <summary>
+            Raised when a new action is added to the stack, the stack is cleared, or an action moves between the undo/redo stacks.
+            </summary>
+        </member>
+        <member name="E:skwas.Forms.UndoManager.AfterUndo">
+            <summary>
+            Raised after an undo action has been executed.
+            </summary>
+        </member>
+        <member name="E:skwas.Forms.UndoManager.BeforeUndo">
+            <summary>
+            Raised before an undo action is executed.
+            </summary>
+        </member>
+        <member name="E:skwas.Forms.UndoManager.AfterRedo">
+            <summary>
+            Raised after a redo action has been executed.
+            </summary>
+        </member>
+        <member name="E:skwas.Forms.UndoManager.BeforeRedo">
+            <summary>
+            Raised before a redo action is executed.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoManager.IsUndoing">
+            <summary>
+            Gets whether an undo operation is in progress.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoManager.IsRedoing">
+            <summary>
+            Gets whether a redo operation is in progress.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoManager.CanUndo">
+            <summary>
+            Gets whether one or more undo actions are on the undo stack.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoManager.CanRedo">
+            <summary>
+            Gets whether one or more redo actions are on the redo stack.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoManager.UndoActions">
+            <summary>
+            Gets the actions on the undo stack.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoManager.RedoActions">
+            <summary>
+            Gets the actions on the redo stack.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoManager.Add(skwas.Forms.UndoAction)">
+            <summary>
+            Adds a new action to the undo stack and clears the redo stack.
+            </summary>
+            <param name="action"></param>
+        </member>
+        <member name="M:skwas.Forms.UndoManager.Clear">
+            <summary>
+            Clears the undo and redo stack.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoManager.Undo(System.Int32)">
+            <summary>
+            Undo the number of actions specified by <paramref name="count"/>.
+            </summary>
+            <param name="count">The number of actions to undo.</param>
+        </member>
+        <member name="M:skwas.Forms.UndoManager.Redo(System.Int32)">
+            <summary>
+            Redo the number of actions specified by <paramref name="count"/>.
+            </summary>
+            <param name="count">The number of actions to redo.</param>
+        </member>
+        <member name="M:skwas.Forms.UndoManager.OnChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:skwas.Forms.UndoManager.Changed"/> event.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:skwas.Forms.UndoManager.OnBeforeUndo(skwas.Forms.UndoEventArgs)">
+            <summary>
+            Raises the <see cref="E:skwas.Forms.UndoManager.BeforeUndo"/> event.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:skwas.Forms.UndoManager.OnAfterUndo(skwas.Forms.UndoEventArgs)">
+            <summary>
+            Raises the <see cref="E:skwas.Forms.UndoManager.AfterUndo"/> event.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:skwas.Forms.UndoManager.OnBeforeRedo(skwas.Forms.UndoEventArgs)">
+            <summary>
+            Raises the <see cref="E:skwas.Forms.UndoManager.BeforeRedo"/> event.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:skwas.Forms.UndoManager.OnAfterRedo(skwas.Forms.UndoEventArgs)">
+            <summary>
+            Raises the <see cref="E:skwas.Forms.UndoManager.AfterRedo"/> event.
+            </summary>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:skwas.Forms.NativeMethods.COPYDATASTRUCT.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.NativeMethods.BCM_FIRST">
+            <summary>
+            Normal button.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.NativeMethods.BCM_SETSHIELD">
+            <summary>
+            Elevated button.
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.UndoMethodAction">
+            <summary>
+            Represents an undo action that will execute a callback for redo/undo operations.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoMethodAction.#ctor(System.Object,System.Action{skwas.Forms.UndoMethodAction},System.Action{skwas.Forms.UndoMethodAction},System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.UndoMethodAction"/>.
+            </summary>
+            <param name="affectedInstance">The instance on which this action operates.</param>
+            <param name="undo">The undo action.</param>
+            <param name="redo">The redo action.</param>
+            <param name="description">A description for the action.</param>
+            <param name="arguments">Optional arguments.</param>
+        </member>
+        <member name="P:skwas.Forms.UndoMethodAction.UndoDescription">
+            <summary>
+            Gets the undo description.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoMethodAction.RedoDescription">
+            <summary>
+            Gets the redo description.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoMethodAction.Arguments">
+            <summary>
+            Gets or sets the arguments associated with the action.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoMethodAction.OnUndo">
+            <summary>
+            Executes the undo action.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoMethodAction.OnRedo">
+            <summary>
+            Executes the redo action.
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.UndoPopup">
+            <summary>
+            Displays a selectable list of undo/redo actions.
+            </summary>
+        </member>
+        <member name="E:skwas.Forms.UndoPopup.UndoPopupClick">
+            <summary>
+            Raised when the popup is clicked or triggered via enter.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoPopup.#ctor(skwas.Forms.UndoPopupMode)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.UndoPopup"/>.
+            </summary>
+            <param name="mode">The mode the popup shows actions for.</param>
+        </member>
+        <member name="M:skwas.Forms.UndoPopup.#ctor(skwas.Forms.UndoManager,skwas.Forms.UndoPopupMode)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.UndoPopup"/>.
+            </summary>
+            <param name="undoManager">The undo manager used to populate the action list.</param>
+            <param name="mode">The mode the popup shows actions for.</param>
+        </member>
+        <member name="M:skwas.Forms.UndoPopup.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStripControlHost"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
+        </member>
+        <member name="P:skwas.Forms.UndoPopup.Mode">
+            <summary>
+            Gets or sets mode the popup shows actions for.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoPopup.UndoManager">
+            <summary>
+            Gets or sets the undo manager used to populate the action list.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoPopup.OnUndoPopupClick(skwas.Forms.UndoPopupClickEventArgs)">
+            <summary>
+            Raises the <see cref="E:skwas.Forms.UndoPopup.UndoPopupClick"/> event.
+            </summary>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="M:skwas.Forms.UndoPopup.RefreshListBox">
+            <summary>
+            Refreshes the actions in the list box.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoPopup.DefaultMargin">
+            <summary>
+            Gets the default margin of an item.
+            </summary>
+            <returns>
+            A <see cref="T:System.Windows.Forms.Padding"/> representing the margin.
+            </returns>
+        </member>
+        <member name="M:skwas.Forms.UndoPopup.ProcessCmdKey(System.Windows.Forms.Message@,System.Windows.Forms.Keys)">
+            <summary>
+            Processes a command key.
+            </summary>
+            <returns>
+            false in all cases.
+            </returns>
+            <param name="m">A <see cref="T:System.Windows.Forms.Message"/>, passed by reference, that represents the window message to process. </param>
+            <param name="keyData">One of the <see cref="T:System.Windows.Forms.Keys"/> values that represents the key to process. </param>
+        </member>
+        <member name="T:skwas.Forms.UndoPopupClickEventArgs">
+            <summary>
+            Represents the event arguments when clicked on an undo popup.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoPopupClickEventArgs.#ctor(System.Int32,skwas.Forms.UndoPopupMode)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.UndoPopupClickEventArgs"/>.
+            </summary>
+            <param name="count">The number of undo/redo actions selected.</param>
+            <param name="mode">The mode (direction).</param>
+        </member>
+        <member name="P:skwas.Forms.UndoPopupClickEventArgs.Count">
+            <summary>
+            Gets the number of undo/redo actions selected.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoPopupClickEventArgs.Mode">
+            <summary>
+            Gets the mode (direction).
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.UndoPopupMode">
+            <summary>
+            Describes the mode for an undo action (direction).
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.UndoPopupMode.Undo">
+            <summary>
+            Undo.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.UndoPopupMode.Redo">
+            <summary>
+            Redo.
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.UndoSetValueAction`1">
+            <summary>
+            Represents an undo action that will set a property on an instance.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoSetValueAction`1.#ctor(System.Object,System.String,`0,`0,System.Windows.Forms.Control,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.UndoSetValueAction`1"/>.
+            </summary>
+            <param name="affectedInstance">The instance on which this action operates.</param>
+            <param name="description">A description for the action.</param>
+            <param name="propertyName">The name of the property on <paramref name="affectedInstance"/> to change.</param>
+            <param name="oldValue">The old/current value of <paramref name="propertyName"/> on <paramref name="affectedInstance"/>.</param>
+            <param name="newValue">The new value for <paramref name="propertyName"/> to be set on <paramref name="affectedInstance"/>.</param>
+            <param name="focusedControl">OBSOLETE: the control to focus when the undo/redo action executes.</param>
+        </member>
+        <member name="P:skwas.Forms.UndoSetValueAction`1.FocusedControl">
+            <summary>
+            Gets the control to focus.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoSetValueAction`1.PropertyName">
+            <summary>
+            Gets the property name.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoSetValueAction`1.Property">
+            <summary>
+            Gets the property.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoSetValueAction`1.NewValue">
+            <summary>
+            Gets the new value to redo to.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoSetValueAction`1.OldValue">
+            <summary>
+            Gets the old value to undo to.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.UndoSetValueAction`1.Description">
+            <summary>
+            Gets a common description.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoSetValueAction`1.OnUndo">
+            <summary>
+            Executes the undo action.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.UndoSetValueAction`1.OnRedo">
+            <summary>
+            Executes the redo action.
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.VirtualTreeNode">
+            <summary>
+            Represents a tree node that supports a large number of children but only loads them into the treeview on first expand.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNode.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.VirtualTreeNode"/>.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNode.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.VirtualTreeNode"/> with specified label text.
+            </summary>
+            <param name="text">The label text of the node.</param>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.IsLoadedIntoTreeView">
+            <summary>
+            Gets whether the node is already loaded into the treeview.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNode.ExpandAll">
+            <summary>
+            Expands all the child tree nodes.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNode.EnsureVisible">
+            <summary>
+            Ensures that the tree node is visible, expanding tree nodes and scrolling the tree view control as necessary.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.FirstNode">
+            <summary>
+            Gets the first child tree node in the tree node collection.
+            </summary>
+            <returns>
+            The first child <see cref="T:skwas.Forms.VirtualTreeNode"/> in the <see cref="P:skwas.Forms.VirtualTreeNode.Nodes"/> collection.
+            </returns>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.LastNode">
+            <summary>
+            Gets the last child tree node in the tree node collection.
+            </summary>
+            <returns>
+            The last child <see cref="T:skwas.Forms.VirtualTreeNode"/> in the <see cref="P:skwas.Forms.VirtualTreeNode.Nodes"/> collection.
+            </returns>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.NextNode">
+            <summary>
+            Gets the next sibling tree node.
+            </summary>
+            <returns>
+            A <see cref="T:skwas.Forms.VirtualTreeNode"/> that represents the next sibling tree node.
+            </returns>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.PrevNode">
+            <summary>
+            Gets the previous sibling tree node.
+            </summary>
+            <returns>
+            A <see cref="T:skwas.Forms.VirtualTreeNode"/> that represents the previous sibling tree node.
+            </returns>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.NextVisibleNode">
+            <summary>
+            Gets the next visible tree node.
+            </summary>
+            <returns>
+            A <see cref="T:skwas.Forms.VirtualTreeNode"/> that represents the next visible tree node.
+            </returns>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.PrevVisibleNode">
+            <summary>
+            Gets the previous visible tree node.
+            </summary>
+            <returns>
+            A <see cref="T:skwas.Forms.VirtualTreeNode"/> that represents the previous visible tree node.
+            </returns>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.Parent">
+            <summary>
+            Gets the parent tree node of the current tree node.
+            </summary>
+            <returns>
+            A <see cref="T:skwas.Forms.VirtualTreeNode"/> that represents the parent of the current tree node.
+            </returns>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.TreeView">
+            <summary>
+            Gets the parent tree view that the tree node is assigned to.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.Nodes">
+            <summary>
+            Gets the collection of <see cref="T:skwas.Forms.VirtualTreeNode"/> objects assigned to the current tree node.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.FullPath">
+            <summary>
+            Gets the path from the root tree node to the current tree node.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.Handle">
+            <summary>
+            Gets the handle of the tree node.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.Index">
+            <summary>
+            Gets the position of the tree node in the tree node collection.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNode.Level">
+            <summary>
+            Gets the zero-based depth of the tree node in the <see cref="T:skwas.Forms.VirtualTreeView"/> control.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNode.GetNodeCount(System.Boolean)">
+            <summary>
+            Returns the number of child tree nodes.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNode.Remove">
+            <summary>
+            Removes the tree node from the tree node collection.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNode.Serialize(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Saves the state of the <see cref="T:System.Windows.Forms.TreeNode"/> to the specified <see cref="T:System.Runtime.Serialization.SerializationInfo"/>. 
+            </summary>
+            <param name="si">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that describes the <see cref="T:System.Windows.Forms.TreeNode"/>.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that indicates the state of the stream during serialization</param>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNode.Deserialize(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Loads the state of the <see cref="T:System.Windows.Forms.TreeNode"/> from the specified <see cref="T:System.Runtime.Serialization.SerializationInfo"/>.
+            </summary>
+            <param name="serializationInfo">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that describes the <see cref="T:System.Windows.Forms.TreeNode"/>.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that indicates the state of the stream during deserialization.</param>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNode.ToString">
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="T:skwas.Forms.VirtualTreeNodeCollection">
+            <summary>
+            Represents a collection of <see cref="T:skwas.Forms.VirtualTreeNode"/> objects.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.VirtualTreeNodeCollection.VirtualExpandDummy">
+            <summary>
+            The name of a dummy node, used to force the native treeview to draw a + sign, indicating the node can be expanded.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNodeCollection.Add(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:skwas.Forms.VirtualTreeNode"/> class with the specified label text.
+            </summary>
+            <param name="text">The label <see cref="P:skwas.Forms.VirtualTreeNode.Text"/> of the new tree node. </param>
+            <returns>The newly created <see cref="T:skwas.Forms.VirtualTreeNode"/>.</returns>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNodeCollection.Move(skwas.Forms.VirtualTreeNode,System.Int32)">
+            <summary>
+            Moves specified <see cref="T:skwas.Forms.VirtualTreeNode"/> by an offset of its current index in the collection.
+            </summary>
+            <param name="node">The node to move.</param>
+            <param name="offset">The offset to move the node by.</param>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeNodeCollection.IsLoadedIntoTreeView">
+            <summary>
+            Gets whether the node is already loaded into the treeview.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNodeCollection.InsertItem(System.Int32,skwas.Forms.VirtualTreeNode)">
+            <summary>
+            Inserts an element into the <see cref="T:System.Collections.ObjectModel.Collection`1"/> at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param><param name="item">The object to insert. The value can be null for reference types.</param><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero.-or-<paramref name="index"/> is greater than <see cref="P:System.Collections.ObjectModel.Collection`1.Count"/>.</exception>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNodeCollection.SetItem(System.Int32,skwas.Forms.VirtualTreeNode)">
+            <summary>
+            Replaces the element at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the element to replace.</param><param name="item">The new value for the element at the specified index. The value can be null for reference types.</param><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero.-or-<paramref name="index"/> is greater than <see cref="P:System.Collections.ObjectModel.Collection`1.Count"/>.</exception>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNodeCollection.MoveItem(System.Int32,System.Int32)">
+            <summary>
+            Moves the item at the specified index to a new location in the collection.
+            </summary>
+            <param name="oldIndex">The zero-based index specifying the location of the item to be moved.</param>
+            <param name="newIndex">The zero-based index specifying the new location of the item.</param>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNodeCollection.RemoveItem(System.Int32)">
+            <summary>
+            Removes the element at the specified index of the <see cref="T:System.Collections.ObjectModel.Collection`1"/>.
+            </summary>
+            <param name="index">The zero-based index of the element to remove.</param><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero.-or-<paramref name="index"/> is equal to or greater than <see cref="P:System.Collections.ObjectModel.Collection`1.Count"/>.</exception>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNodeCollection.ClearItems">
+            <summary>
+            Removes all elements from the <see cref="T:System.Collections.ObjectModel.Collection`1"/>.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNodeCollection.SetParents(skwas.Forms.VirtualTreeNode,skwas.Forms.VirtualTreeView,skwas.Forms.VirtualTreeNode)">
+            <summary>
+            Assigns a new treeview and parent node to specified nodes.
+            </summary>
+            <param name="node">The node that is assigned to the treeview.</param>
+            <param name="treeview">The treeview or null to remove the treeview reference.</param>
+            <param name="parentNode">The parent node.</param>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNodeCollection.SetParents(System.Collections.Generic.IEnumerable{skwas.Forms.VirtualTreeNode},skwas.Forms.VirtualTreeView,skwas.Forms.VirtualTreeNode)">
+            <summary>
+            Assigns a new treeview and parent node to specified nodes.
+            </summary>
+            <param name="nodes">The nodes that are assigned to the treeview.</param>
+            <param name="treeview">The treeview or null to remove the treeview reference.</param>
+            <param name="parentNode">The parent node.</param>
+        </member>
+        <member name="T:skwas.Forms.VirtualTreeView">
+            <summary>
+            Displays a hierarchical collection of labeled items, each represented by a <see cref="T:skwas.Forms.VirtualTreeNode"/>.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.VirtualTreeView"/>.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.TreeView"/> and optionally releases the managed resources. 
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.BeginUpdate">
+            <summary>
+            Disables any redrawing of the tree view.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.EndUpdate">
+            <summary>
+            Enables the redrawing of the tree view.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeView.IsUpdating">
+            <summary>
+            True when redrawing of the tree view is disabled.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.OnHandleCreated(System.EventArgs)">
+            <summary>
+            Overrides <see cref="M:System.Windows.Forms.Control.OnHandleCreated(System.EventArgs)"/>.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.Find(System.Func{skwas.Forms.VirtualTreeNode,System.Boolean},System.Boolean)">
+            <summary>
+            Searches the treeview for a <paramref name="match"/>, optionally searching all child nodes.
+            </summary>
+            <param name="match">The function match.</param>
+            <param name="searchAllChildren">true to search all child nodes.</param>
+            <returns>Returns the first match.</returns>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Overrides <see cref="M:System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)"/>.
+            </summary>
+            <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process.</param>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Paints the background of the control.
+            </summary>
+            <param name="pevent">A <see cref="T:System.Windows.Forms.PaintEventArgs"/> that contains information about the control to paint. </param>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.OnDrawNode(System.Windows.Forms.DrawTreeNodeEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.TreeView.DrawNode"/> event.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.DrawTreeNodeEventArgs"/> that contains the event data. </param>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.GetNodeCount(System.Boolean)">
+            <summary>
+            Retrieves the number of tree nodes, optionally including those in all subtrees, assigned to the tree view control.
+            </summary>
+            <param name="includeSubTrees">true to count the <see cref="T:skwas.Forms.VirtualTreeNode"/> items that the subtrees contain; otherwise, false. </param>
+            <returns>
+            The number of tree nodes, optionally including those in all subtrees, assigned to the tree view control.
+            </returns>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.GetNodeCount(System.Collections.Generic.ICollection{skwas.Forms.VirtualTreeNode},System.Boolean)">
+            <summary>
+            Retrieves the number of tree nodes, optionally including those in all subtrees, assigned to the tree view control.
+            </summary>
+            <param name="nodes">The treenode collection to enumerate.</param>
+            <param name="includeSubTrees">true to count the <see cref="T:skwas.Forms.VirtualTreeNode"/> items that the subtrees contain; otherwise, false. </param>
+            <returns>
+            The number of tree nodes, optionally including those in all subtrees, assigned to the tree view control.
+            </returns>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeView.SelectedNode">
+            <summary>
+            Gets or sets the tree node that is currently selected in the tree view control.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.VirtualTreeView.Nodes">
+            <summary>
+            Gets the collection of tree nodes that are assigned to the tree view control.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeView.OnBeforeExpand(System.Windows.Forms.TreeViewCancelEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.TreeView.BeforeExpand"/> event.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.TreeViewCancelEventArgs"/> that contains the event data. </param>
+        </member>
+        <member name="T:skwas.Forms.VsToolStrip">
+            <summary>
+            Provides a container for Windows toolbar objects, and is drawn using a 3D like style, if visual styles is supported and enabled on the operating system.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VsToolStrip.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.VsToolStrip"/>.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VsToolStrip.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStrip"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
+        </member>
+        <member name="M:skwas.Forms.VsToolStrip.InitPaint">
+            <summary>
+            Initialize paint objects.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VsToolStrip.OnSystemColorsChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.SystemColorsChanged"/> event.
+            </summary>
+            <param name="e">An <see cref="T:System.EventArgs"/> that contains the event data. </param>
+        </member>
+        <member name="M:skwas.Forms.VsToolStrip.OnLayout(System.Windows.Forms.LayoutEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.Layout"/> event.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.LayoutEventArgs"/> that contains the event data. </param>
+        </member>
+        <member name="M:skwas.Forms.VsToolStrip.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.Paint"/> event.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"/> that contains the event data. </param>
+        </member>
+        <member name="M:skwas.Forms.VsToolStrip.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Forms.Control.Paint"/> event for the <see cref="T:System.Windows.Forms.ToolStrip"/> background.
+            </summary>
+            <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"/> that contains information about the control to paint. </param>
+        </member>
+        <member name="M:skwas.Forms.VsToolStrip.DrawBackground(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Draws the background using a 3D like style, if visual styles is supported and enabled.
+            </summary>
+            <param name="e">The event args.</param>
+            <returns>true if the background is drawn using <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer"/>, and false otherwise.</returns>
+        </member>
+        <member name="T:skwas.Forms.Window">
+            <summary>
+            Provides a wrap around windows not belonging to the current process. Exposes several basic properties/methods to get information about the window in question.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.Window.#ctor(System.IntPtr)">
+            <summary>
+            Creates a new instance of Window for specified window handle.
+            </summary>
+            <param name="handle">The window handle.</param>
+        </member>
+        <member name="P:skwas.Forms.Window.Handle">
+            <summary>
+            Gets the window handle.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.ProcessId">
+            <summary>
+            Gets the process id the window belongs to.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.ThreadId">
+            <summary>
+            Gets the thread id the window belongs to.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.IsCurrentProcess">
+            <summary>
+            Gets if the window belongs to the local process.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.Text">
+            <summary>
+            Gets the window caption.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.ClassName">
+            <summary>
+            Gets the classname of the window.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.IsDesktop">
+            <summary>
+            Gets whether the current window is the desktop window.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.ModuleName">
+            <summary>
+            Gets the module name of the window.
+            </summary>
+            <remarks>This property accesses the process through the WinAPI, which is faster, compared to Process.MainModule.FileName. This is old code from .NET 2 era so not sure if still valid.</remarks>
+        </member>
+        <member name="P:skwas.Forms.Window.WindowStyles">
+            <summary>
+            Gets the window style attributes.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.ExtendedWindowStyles">
+            <summary>
+            Gets the window style attributes.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.ControlStyles">
+            <summary>
+            Gets the control style attributes.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.Location">
+            <summary>
+            Gets the coordinates of the upper-left corner of the window relative to the main desktop.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.Size">
+            <summary>
+            Gets the height and width of the window.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.Bounds">
+            <summary>
+            Gets the bounds of the window.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.ClientSize">
+            <summary>
+            Gets the height and width of the window.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.Exists">
+            <summary>
+            Gets wether the window is still valid (iow. still exists on the local computer)
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.Process">
+            <summary>
+            Gets the process the window belongs to.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.MaximizeBox">
+            <summary>
+            Gets wether the window has a maximize button.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.MinimizeBox">
+            <summary>
+            Gets wether the window has a maximize button.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.ControlBox">
+            <summary>
+            Gets wether the window has a controlbox.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.HelpButton">
+            <summary>
+            Gets wether the window has a help button.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.ToolWindow">
+            <summary>
+            Gets wether the window is a toolwindow.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.BorderStyle">
+            <summary>
+            Gets the border style for the window.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.FileVersionInfo">
+            <summary>
+            Gets a <see cref="P:skwas.Forms.Window.FileVersionInfo"/> representing the version information associated with the window's main module.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.Parent">
+            <summary>
+            Gets the parent window.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.IsMinimized">
+            <summary>
+            Gets whether the current window is minimized.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.Window.IsMaximized">
+            <summary>
+            Gets whether the current window is maximized.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.Window.GetWindowText(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Returns the window caption text for specified handle.
+            </summary>
+            <param name="handle">The window handle to query.</param>
+            <returns>The window caption text for specified handle.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetClassName(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Returns the window class name for specified handle.
+            </summary>
+            <param name="handle">The window handle to query.</param>
+            <returns>The window class name for specified handle.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetModuleName(System.Int32)">
+            <summary>
+            Returns the name of the main module of specified process id.
+            </summary>
+            <param name="processId">The process id to get the module name for.</param>
+            <returns>The name of the main module of specified process id.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetWindowStyles(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Returns the window style attributes for specified handle.
+            </summary>
+            <param name="window">The window handle to query.</param>
+        </member>
+        <member name="M:skwas.Forms.Window.GetWindowStyles(System.IntPtr)">
+            <summary>
+            Returns the window style attributes for specified handle.
+            </summary>
+            <param name="handle">The window handle to query.</param>
+        </member>
+        <member name="M:skwas.Forms.Window.GetExtendedWindowStyles(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Returns the window style attributes for specified handle.
+            </summary>
+            <param name="window">The window handle to query.</param>
+        </member>
+        <member name="M:skwas.Forms.Window.GetExtendedWindowStyles(System.IntPtr)">
+            <summary>
+            Returns the window style attributes for specified handle.
+            </summary>
+            <param name="handle">The window handle to query.</param>
+        </member>
+        <member name="M:skwas.Forms.Window.GetControlStyles(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Returns the control style attributes for specified handle.
+            </summary>
+            <param name="handle">The window handle to query.</param>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.SetWindowPos(System.Windows.Forms.IWin32Window,skwas.Forms.WindowOrder,System.Drawing.Rectangle,skwas.Forms.WindowPosition)">
+            <summary>
+            Sets the window position, z-order.
+            </summary>
+            <param name="handle">The window handle.</param>
+            <param name="insertAfter">Z-Order flags</param>
+            <param name="bounds">The new position and size.</param>
+            <param name="flags">Options for showing the window.</param>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.SetWindowPos(System.Windows.Forms.IWin32Window,System.IntPtr,System.Drawing.Rectangle,skwas.Forms.WindowPosition)">
+            <summary>
+            Sets the window position, z-order.
+            </summary>
+            <param name="handle">The window handle.</param>
+            <param name="insertAfter">Z-Order flags</param>
+            <param name="bounds">The new position and size.</param>
+            <param name="flags">Options for showing the window.</param>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetLocation(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Returns the coordinates of the upper-left corner of the window relative to the main desktop for specified handle.
+            </summary>
+            <param name="handle">The window handle to query.</param>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetSize(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Returns the height and width of the window for specified window handle.
+            </summary>
+            <param name="handle">The window handle to query.</param>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetBounds(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Returns the bounds of the window for specified window handle.
+            </summary>
+            <param name="handle">The window handle to query.</param>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetClientSize(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Returns the height and width of the window for specified window handle.
+            </summary>
+            <param name="handle">The window handle to query.</param>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.PointToClient(System.Drawing.Point)">
+            <summary>
+            Computes the location of the specified screen point into client coordinates.
+            </summary>
+            <param name="p">The screen coordinate Point to convert.</param>
+            <returns>A Point that represents the converted Point, p, in client coordinates.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.SendMessage(System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Sends a window message to the current window with parameters.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.Window.SendMessage(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sends a window message to the current window with parameters.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.Window.PostMessage(System.Int32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Posts a window message to the current window with parameters.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.Window.PostMessage(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Posts a window message to the current window with parameters.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.Window.SetCapture">
+            <summary>
+            Captures the mouse to the window.
+            </summary>
+            <returns>Returns a handle from the previous window that had mouse capture.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetWindows(System.Int32)">
+            <summary>
+            Returns an enumerable of windows for specified process id.
+            </summary>
+            <param name="processId">The process (id) to get windows for.</param>
+        </member>
+        <member name="M:skwas.Forms.Window.GetWindows(System.Func{skwas.Forms.Window,System.Boolean})">
+            <summary>
+            Returns an enumerable of windows, filtered by specified predicate match.
+            </summary>
+            <param name="match">The predicate to filter by.</param>
+        </member>
+        <member name="M:skwas.Forms.Window.GetChildWindows(skwas.Forms.Window,System.Func{skwas.Forms.Window,System.Boolean})">
+            <summary>
+            Returns an enumerable of child windows, filtered by specified predicate match.
+            </summary>
+            <param name="parentWindow">The parent window.</param>
+            <param name="match">The predicate to filter by.</param>
+        </member>
+        <member name="P:skwas.Forms.Window.Childs">
+            <summary>
+            Gets an array of type Window that represents all the child windows for this window.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.Window.Show(skwas.Forms.ShowWindow)">
+            <summary>
+            Shows the window using specified parameters.
+            </summary>
+            <param name="nCmdShow"></param>
+        </member>
+        <member name="M:skwas.Forms.Window.Activate">
+            <summary>
+            Activates the window. The window must be attached to the calling thread's message queue. 
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.Window.BringToTop">
+            <summary>
+            Brings the window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the top-level parent window associated with the child window is activated. 
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.Window.SetToForeground">
+            <summary>
+            Puts the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various visual cues are changed for the user. The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.Window.GetForeground">
+            <summary>
+            Gets the foreground window.
+            </summary>
+            <returns>The foreground window.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetDesktopWindow">
+            <summary>
+            Gets the desktop window.
+            </summary>
+            <returns>The desktop window.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.SetParent(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Assigns a new parent to the current window.
+            </summary>
+            <param name="newParent">The new parent.</param>
+        </member>
+        <member name="M:skwas.Forms.Window.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetAssemblyIcon">
+            <summary>
+            Returns the icon associated with the application executable.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetWindowIcon">
+            <summary>
+            Returns the icon associated with the window.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetFocusedControl">
+            <summary>
+            Gets the current focused control.
+            </summary>
+            <returns>The focused control or null.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetParent(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Gets the window parent.
+            </summary>
+            <param name="window">The window to get the parent of.</param>
+            <returns>The parent window or null if the window is a top level window.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetClassPath">
+            <summary>
+            Gets all classes of child windows down to the parent root window in path form separated by '\'.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.Find(System.String,System.String)">
+            <summary>
+            Returns the first window with specified text and class name.
+            </summary>
+            <param name="text">The window text, or null to search only by class name.</param>
+            <param name="className">The window class name, or null to search only by window text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.Window.Equals(skwas.Forms.Window)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="other">The object to compare with the current object. </param>
+            <returns>
+            true if the specified object  is equal to the current object; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:skwas.Forms.Window.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="obj">The object to compare with the current object. </param>
+            <returns>
+            true if the specified object  is equal to the current object; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:skwas.Forms.Window.GetHashCode">
+            <summary>
+            Serves as the default hash function. 
+            </summary>
+            <returns>
+            A hash code for the current object.
+            </returns>
+        </member>
+        <member name="M:skwas.Forms.Window.op_Equality(skwas.Forms.Window,skwas.Forms.Window)">
+            <summary>
+            Determines whether the specified objects are equal.
+            </summary>
+            <param name="left">The first object.</param>
+            <param name="right">The second object.</param>
+            <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.op_Inequality(skwas.Forms.Window,skwas.Forms.Window)">
+            <summary>
+            Determines whether the specified objects are not equal.
+            </summary>
+            <param name="left">The first object.</param>
+            <param name="right">The second object.</param>
+            <returns>true if the specified object is not equal to the current object; otherwise, false.</returns>
+        </member>
+        <member name="M:skwas.Forms.Window.op_Explicit(System.Windows.Forms.Control)~skwas.Forms.Window">
+            <summary>
+            Explicit cast from .NET control.
+            </summary>
+            <param name="window"></param>
+        </member>
+        <member name="M:skwas.Forms.Window.op_Explicit(System.Windows.Forms.NativeWindow)~skwas.Forms.Window">
+            <summary>
+            Explicit cast from NativeWindow.
+            </summary>
+            <param name="window"></param>
+        </member>
+        <member name="M:skwas.Forms.Window.Clone">
+            <summary>
+            Creates a new object that is a copy of the current instance.
+            </summary>
+            <returns>
+            A new object that is a copy of this instance.
+            </returns>
+        </member>
+        <member name="T:skwas.Forms.WindowException">
+            <summary>
+            The exception that is thrown when an error occurs in the Window class.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.WindowException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.WindowException"/>.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:skwas.Forms.WindowException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:skwas.Forms.WindowException"/>.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="F:skwas.Forms.WindowOrder.NoTopMost">
+            <summary>
+            Places the window above all non-topmost windows (that is, behind all topmost windows). This flag has no effect if the window is already a non-topmost window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowOrder.TopMost">
+            <summary>
+            Places the window above all non-topmost windows. The window maintains its topmost position even when it is deactivated.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowOrder.Top">
+            <summary>
+            Places the window at the top of the Z order.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowOrder.Bottom">
+            <summary>
+            Places the window at the bottom of the Z order. If the hWnd parameter identifies a topmost window, the window loses its topmost status and is placed at the bottom of all other windows.
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.WindowPosition">
+            <summary>
+            Describes methods of showing a window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.AsyncWindowPos">
+            <summary>
+            If the calling thread and the thread that owns the window are attached to different input queues, the system posts the request to the thread that owns the window.This prevents the calling thread from blocking its execution while other threads process the request.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.DeferErase">
+            <summary>
+            Prevents generation of the WM_SYNCPAINT message.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.DrawFrame">
+            <summary>
+            Draws a frame (defined in the window's class description) around the window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.FrameChanged">
+            <summary>
+            Applies new frame styles set using the SetWindowLong function.Sends a WM_NCCALCSIZE message to the window, even if the window's size is not being changed. If this flag is not specified, WM_NCCALCSIZE is sent only when the window's size is being changed.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.HideWindow">
+            <summary>
+            Hides the window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.NoActivate">
+            <summary>
+            Does not activate the window.If this flag is not set, the window is activated and moved to the top of either the topmost or non-topmost group (depending on the setting of the hWndInsertAfter parameter).
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.NoCopyBits">
+            <summary>
+            Discards the entire contents of the client area.If this flag is not specified, the valid contents of the client area are saved and copied back into the client area after the window is sized or repositioned.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.NoMove">
+            <summary>
+            Retains the current position (ignores X and Y parameters).
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.NoOwnerZOrder">
+            <summary>
+            Does not change the owner window's position in the Z order.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.NoRedraw">
+            <summary>
+            Does not redraw changes.If this flag is set, no repainting of any kind occurs. This applies to the client area, the nonclient area (including the title bar and scroll bars), and any part of the parent window uncovered as a result of the window being moved.When this flag is set, the application must explicitly invalidate or redraw any parts of the window and parent window that need redrawing.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.NoReposition">
+            <summary>
+            Same as the SWP_NOOWNERZORDER flag.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.NoSendChanging">
+            <summary>
+            Prevents the window from receiving the WM_WINDOWPOSCHANGING message.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.NoSize">
+            <summary>
+            Retains the current size (ignores the cx and cy parameters).
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.NoZOrder">
+            <summary>
+            Retains the current Z order (ignores the hWndInsertAfter parameter).
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowPosition.ShowWindow">
+            <summary>
+            Displays the window.
+            </summary>
+        </member>
+        <member name="T:skwas.Forms.WindowStyles">
+            <summary>
+            Describes styles associated with a window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Overlapped">
+            <summary>
+            The window is an overlapped window. An overlapped window has a title bar and a border. Same as the WS_TILED style.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Popup">
+            <summary>
+            The windows is a pop-up window. This style cannot be used with the WS_CHILD style.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Child">
+            <summary>
+            The window is a child window. A window with this style cannot have a menu bar. This style cannot be used with the WS_POPUP style.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Minimize">
+            <summary>
+            The window is initially minimized. Same as the WS_ICONIC style.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Visible">
+            <summary>
+            The window is initially visible. This style can be turned on and off by using the ShowWindow or SetWindowPos function.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Disabled">
+            <summary>
+            The window is initially disabled. A disabled window cannot receive input from the user. To change this after a window has been created, use the EnableWindow function.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.ClipSiblings">
+            <summary>
+            Clips child windows relative to each other; that is, when a particular child window receives a WM_PAINT message, the WS_CLIPSIBLINGS style clips all other overlapping child windows out of the region of the child window to be updated. If WS_CLIPSIBLINGS is not specified and child windows overlap, it is possible, when drawing within the client area of a child window, to draw within the client area of a neighboring child window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.ClipChildren">
+            <summary>
+            Excludes the area occupied by child windows when drawing occurs within the parent window. This style is used when creating the parent window.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Maximize">
+            <summary>
+            The window is initially maximized.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Caption">
+            <summary>
+            The window has a title bar (includes the WS_BORDER style).
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Border">
+            <summary>
+            The window has a thin-line border.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.DlgFrame">
+            <summary>
+            The window has a border of a style typically used with dialog boxes. A window with this style cannot have a title bar.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.VScroll">
+            <summary>
+            The window has a vertical scroll bar.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.HScroll">
+            <summary>
+            The window has a horizontal scroll bar.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.SysMenu">
+            <summary>
+            The window has a window menu on its title bar. The WS_CAPTION style must also be specified.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.ThickFrame">
+            <summary>
+            The window has a sizing border. Same as the WS_SIZEBOX style.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Group">
+            <summary>
+            The window is the first control of a group of controls. The group consists of this first control and all controls defined after it, up to the next control with the WS_GROUP style. The first control in each group usually has the WS_TABSTOP style so that the user can move from group to group. The user can subsequently change the keyboard focus from one control in the group to the next control in the group by using the direction keys.
+            You can turn this style on and off to change dialog box navigation. To change this style after a window has been created, use the SetWindowLong function.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.TabStop">
+            <summary>
+            The window is a control that can receive the keyboard focus when the user presses the TAB key. Pressing the TAB key changes the keyboard focus to the next control with the WS_TABSTOP style.
+            You can turn this style on and off to change dialog box navigation. To change this style after a window has been created, use the SetWindowLong function. For user-created windows and modeless dialogs to work with tab stops, alter the message loop to call the IsDialogMessage function.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.MinimizeBox">
+            <summary>
+            The window has a minimize button. Cannot be combined with the WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.MaximizeBox">
+            <summary>
+            The window has a maximize button. Cannot be combined with the WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.OverlappedWindow">
+            <summary>
+            The window is an overlapped window. Same as the WS_TILEDWINDOW style.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.PopupWindow">
+            <summary>
+            The window is a pop-up window. The WS_CAPTION and WS_POPUPWINDOW styles must be combined to make the window menu visible.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.SizeBox">
+            <summary>
+            The window has a sizing border. Same as the WS_THICKFRAME style.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Iconic">
+            <summary>
+            The window is initially minimized. Same as the WS_MINIMIZE style.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.Tiled">
+            <summary>
+            The window is an overlapped window. An overlapped window has a title bar and a border. Same as the WS_OVERLAPPED style.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.TiledWindow">
+            <summary>
+            The window is an overlapped window. Same as the WS_OVERLAPPEDWINDOW style.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.WindowStyles.ChildWindow">
+            <summary>
+            Same as the WS_CHILD style.
+            </summary>
+        </member>
+    </members>
+</doc>
