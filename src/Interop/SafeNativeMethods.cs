@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // ReSharper disable once CheckNamespace
 namespace skwas.Forms
 {
-	internal abstract partial class SafeNativeMethods
+	internal static class SafeNativeMethods
 	{
 		[DllImport("user32", CharSet = CharSet.Auto)]
 		public static extern bool ShowWindow(HandleRef hWnd, ShowWindow nCmdShow);

@@ -15,13 +15,7 @@ namespace skwas.Forms
 	public class VirtualTreeNode
 		: TreeNode
 	{
-		/// <summary>
-		/// The name of a dummy node, used to force the native treeview to draw a + sign, indicating the node can be expanded.
-		/// </summary>
-		private static readonly string VirtualExpandDummy = typeof(VirtualTreeNode).FullName + "_##dummy_treenode##";
-
 		private VirtualTreeNodeCollection _nodes;
-		private bool _hasExpandedOnce;
 		private VirtualTreeView _treeview;
 		
 		/// <summary>
@@ -43,7 +37,7 @@ namespace skwas.Forms
 		/// <summary>
 		/// Gets whether the node is already loaded into the treeview.
 		/// </summary>
-		internal bool IsLoadedIntoTreeView => base.TreeView != null;
+		private bool IsLoadedIntoTreeView => base.TreeView != null;
 
 		/// <summary>
 		/// Expands all the child tree nodes.

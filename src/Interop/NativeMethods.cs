@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Text;
 
 // ReSharper disable once CheckNamespace
 namespace skwas.Forms
