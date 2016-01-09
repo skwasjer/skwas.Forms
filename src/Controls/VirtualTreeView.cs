@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
+// ReSharper disable once CheckNamespace
 namespace skwas.Forms
 {
 	/// <summary>
@@ -15,8 +15,9 @@ namespace skwas.Forms
 	public class VirtualTreeView
 		: TreeView
 	{
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private int _updateCounter;
-//		private VirtualTreeNodeCollection _nodes;
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		internal readonly VirtualTreeNode InternalRoot;
 
 		/// <summary>

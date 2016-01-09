@@ -1,10 +1,11 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Windows.Forms;
 
+// ReSharper disable once CheckNamespace
 namespace skwas.Forms
 {
 	/// <summary>
@@ -15,7 +16,9 @@ namespace skwas.Forms
 	public class VirtualTreeNode
 		: TreeNode
 	{
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private VirtualTreeNodeCollection _nodes;
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private VirtualTreeView _treeview;
 		
 		/// <summary>

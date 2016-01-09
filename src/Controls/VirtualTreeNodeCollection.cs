@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
+// ReSharper disable once CheckNamespace
 namespace skwas.Forms
 {
 	/// <summary>
@@ -15,10 +17,14 @@ namespace skwas.Forms
 		/// <summary>
 		/// The name of a dummy node, used to force the native treeview to draw a + sign, indicating the node can be expanded.
 		/// </summary>
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private static readonly string VirtualExpandDummy = typeof(VirtualTreeNodeCollection).FullName + "_##dummy_treenode##";
 
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private readonly VirtualTreeNode _owner;
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private TreeNodeCollection _baseCollection;
+		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private bool _hasExpandedOnce;
 
 		internal VirtualTreeNodeCollection(VirtualTreeNode owner)
