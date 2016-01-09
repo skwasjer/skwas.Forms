@@ -61,11 +61,7 @@ namespace skwas.Forms
 		/// </summary>
 		public new void EnsureVisible()
 		{
-#if NEWTREEVIEW
 			Nodes.LoadIntoTree();
-#else
-			if (!IsLoadedIntoTreeView) LoadParentVirtualNodes();
-#endif
 			base.EnsureVisible();
 		}
 
@@ -137,11 +133,7 @@ namespace skwas.Forms
 		{
 			get
 			{
-#if NEWTREEVIEW
 				Nodes.LoadIntoTree();
-#else
-				if (!IsLoadedIntoTreeView) LoadParentVirtualNodes();
-#endif
 				return (VirtualTreeNode)base.NextVisibleNode;
 			}
 		}
@@ -158,11 +150,7 @@ namespace skwas.Forms
 		{
 			get
 			{
-#if NEWTREEVIEW
 				Nodes.LoadIntoTree();
-#else
-				if (!IsLoadedIntoTreeView) LoadParentVirtualNodes();
-#endif
 				return (VirtualTreeNode)base.PrevVisibleNode;
 			}
 		}
@@ -185,14 +173,7 @@ namespace skwas.Forms
 		public new VirtualTreeView TreeView
 		{
 			get { return _treeview; }
-			internal set 
-			{
-				if (_treeview == value) return;
-				_treeview = value;
-#if !NEWTREEVIEW
-				VirtualTreeView.SetParents(Nodes, value);
-#endif
-			}
+			internal set { _treeview = value; }
 		}
 
 		/// <summary>
@@ -200,26 +181,7 @@ namespace skwas.Forms
 		/// </summary>
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		[Category("Behavior")]
-		public new VirtualTreeNodeCollection Nodes
-		{
-			get
-			{
-				if (_nodes == null)
-				{
-					_nodes = new VirtualTreeNodeCollection(this);
-#if !NEWTREEVIEW
-					_nodes.AfterInsert += _nodes_AfterInsert;
-					_nodes.AfterSet += _nodes_AfterSet;
-					_nodes.AfterRemove += _nodes_AfterRemove;
-					_nodes.BeforeInsert += _nodes_BeforeInsert;
-					_nodes.BeforeClear += _nodes_BeforeClear;
-					_nodes.AfterClear += _nodes_AfterClear;
-					_nodes.AfterMove += _nodes_AfterMove;
-#endif
-				}
-				return _nodes;
-			}
-		}
+		public new VirtualTreeNodeCollection Nodes => _nodes ?? (_nodes = new VirtualTreeNodeCollection(this));
 
 		/// <summary>
 		/// Gets the path from the root tree node to the current tree node.
@@ -228,11 +190,7 @@ namespace skwas.Forms
 		{
 			get 
 			{
-#if NEWTREEVIEW
 				Parent?.Nodes.LoadIntoTree();
-#else
-				if (!IsLoadedIntoTreeView) LoadParentVirtualNodes();
-#endif
 				return base.FullPath;
 			}
 		}
@@ -244,11 +202,7 @@ namespace skwas.Forms
 		{
 			get
 			{
-#if NEWTREEVIEW
 				Parent?.Nodes.LoadIntoTree();
-#else
-				if (!IsLoadedIntoTreeView) LoadParentVirtualNodes();
-#endif
 				return base.Handle;
 			}			
 		}
@@ -296,107 +250,6 @@ namespace skwas.Forms
 			else
 				Parent.Nodes.Remove(this);
 		}
-
-#if !NEWTREEVIEW
-		void _nodes_BeforeClear(object sender, EventArgs e)
-		{
-			VirtualTreeView.SetParents(Nodes);
-		}
-
-		void _nodes_AfterClear(object sender, EventArgs e)
-		{
-			if (_hasExpandedOnce)
-				base.Nodes.Clear();
-		}
-
-		void _nodes_AfterSet(object sender, IO.SetEventArgs<VirtualTreeNode> e)
-		{
-			VirtualTreeView.SetParents(e.Value);
-			VirtualTreeView.SetParents(e.NewValue, _treeview, this);
-
-			if (_hasExpandedOnce)
-				base.Nodes[e.Index] = e.NewValue;
-		}
-
-		void _nodes_AfterRemove(object sender, IO.InsertRemoveEventArgs<VirtualTreeNode> e)
-		{
-			if (_hasExpandedOnce)
-				base.Nodes.Remove(e.Value);
-			else if (_nodes.Count == 0)
-			{
-				// Remove + if it is set.
-				if (base.FirstNode != null && base.FirstNode.Name == VirtualExpandDummy)
-					base.FirstNode.Remove();
-			}
-			VirtualTreeView.SetParents(e.Value);
-		}
-
-		private void _nodes_BeforeInsert(object sender, IO.InsertRemoveEventArgs<VirtualTreeNode> e)
-		{
-			VirtualTreeView.SetParents(e.Value, _treeview, this);
-		}
-
-
-		void _nodes_AfterInsert(object sender, IO.InsertRemoveEventArgs<VirtualTreeNode> e)
-		{
-			if (_hasExpandedOnce)
-				base.Nodes.Insert(e.Index, e.Value);
-			else if (_nodes.Count == 1)
-			{
-				// This is the first added item. Add a + sign.
-				base.Nodes.Add(VirtualExpandDummy, VirtualExpandDummy);
-			}
-		}
-
-		void _nodes_AfterMove(object sender, IO.MoveEventArgs<VirtualTreeNode> e)
-		{
-			if (_hasExpandedOnce)
-			{
-				base.Nodes.RemoveAt(e.OldIndex);
-				base.Nodes.Insert(e.NewIndex, e.Value);
-			}
-		}
-
-		internal void LoadParentVirtualNodes()
-		{
-			if (Parent == null) return;
-			Parent.LoadVirtualNodes();
-			Parent.LoadParentVirtualNodes();
-		}
-
-		internal void LoadVirtualNodes()
-		{
-			if (_hasExpandedOnce) return;
-
-			var interactive = TreeView != null && Nodes.Count > 50;
-			var busyCursor = false;
-			if (interactive)
-			{
-				busyCursor = Nodes.Count > 200;
-				if (busyCursor) TreeView.Cursor = Cursors.AppStarting;
-				TreeView.BeginUpdate();
-			}
-
-			try
-			{
-				// Remove dummy.
-				base.Nodes.RemoveByKey(VirtualExpandDummy);
-
-				// Copy nodes from the virtual collection to the underlying base collection.
-				base.Nodes.AddRange(Nodes.ToArray<TreeNode>());
-			}
-			finally
-			{
-				_hasExpandedOnce = true;
-				if (interactive)
-				{
-					TreeView.EndUpdate();
-					if (busyCursor) TreeView.Cursor = Cursors.Default;
-				}
-			}
-		}
-#endif
-
 
 		/// <summary>
 		/// Saves the state of the <see cref="T:System.Windows.Forms.TreeNode"/> to the specified <see cref="T:System.Runtime.Serialization.SerializationInfo"/>. 

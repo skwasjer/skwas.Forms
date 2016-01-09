@@ -6,7 +6,6 @@ using System.Windows.Forms;
 
 namespace skwas.Forms
 {
-#if NEWTREEVIEW
 	public class VirtualTreeNodeCollection
 		: ObservableCollection<VirtualTreeNode>
 	{
@@ -207,35 +206,4 @@ namespace skwas.Forms
 			}
 		}
 	}
-#else
-	public class VirtualTreeNodeCollection
-		: IO.GenericList<VirtualTreeNode>
-	{
-		private VirtualTreeNode _owner;
-		internal VirtualTreeNodeCollection(VirtualTreeNode owner)
-		{
-			_owner = owner;
-		}
-
-		public new int Add(VirtualTreeNode node)
-		{
-			base.Add(node);
-			return IndexOf(node);
-		}
-
-		public VirtualTreeNode Add(string text)
-		{
-			var node = new VirtualTreeNode(text);
-			base.Add(node);
-			return node;
-		}
-
-		protected override void OnBeforeSet(IO.SetEventArgs<VirtualTreeNode> e)
-		{
-			if (e == null)
-				throw new ArgumentNullException("Can't set an empty node.");
-			base.OnBeforeSet(e);
-		}
-	}
-#endif
 }
