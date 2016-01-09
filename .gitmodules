@@ -1,0 +1,3 @@
+[submodule "lib/skwas.IO"]
+	path = lib/skwas.IO
+	url = https://github.com/skwasjer/skwas.IO.git
