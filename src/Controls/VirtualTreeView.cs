@@ -78,6 +78,13 @@ namespace skwas.Forms
 				SafeNativeMethods.SetWindowTheme(Handle, "explorer", null);
 		}
 
+		// TODO: move to VirtualTreeNodeCollection and support multiple in return set.
+		/// <summary>
+		/// Searches the treeview for a <paramref name="match"/>, optionally searching all child nodes.
+		/// </summary>
+		/// <param name="match">The function match.</param>
+		/// <param name="searchAllChildren">true to search all child nodes.</param>
+		/// <returns>Returns the first match.</returns>
 		public VirtualTreeNode Find(Func<VirtualTreeNode, bool> match, bool searchAllChildren)
 		{
 			return Find(Nodes, match, searchAllChildren);

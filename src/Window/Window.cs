@@ -492,21 +492,33 @@ namespace skwas.Forms
 			return p;
 		}
 
+		/// <summary>
+		/// Sends a window message to the current window with parameters.
+		/// </summary>
 		public IntPtr SendMessage(int msg, IntPtr wParam, IntPtr lParam)
 		{
 			return UnsafeNativeMethods.SendMessage(new HandleRef(this, Handle), msg, wParam, lParam);
 		}
 
+		/// <summary>
+		/// Sends a window message to the current window with parameters.
+		/// </summary>
 		public IntPtr SendMessage(int msg, int wParam, int lParam)
 		{
 			return SendMessage(msg, new IntPtr(wParam), new IntPtr(lParam));
 		}
 
+		/// <summary>
+		/// Posts a window message to the current window with parameters.
+		/// </summary>
 		public bool PostMessage(int msg, IntPtr wParam, IntPtr lParam)
 		{
 			return UnsafeNativeMethods.PostMessage(new HandleRef(this, Handle), msg, wParam, lParam);
 		}
 
+		/// <summary>
+		/// Posts a window message to the current window with parameters.
+		/// </summary>
 		public bool PostMessage(int msg, int wParam, int lParam)
 		{
 			return PostMessage(msg, new IntPtr(wParam), new IntPtr(lParam));

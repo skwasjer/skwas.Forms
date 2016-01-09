@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace skwas.Forms
 {
+	/// <summary>
+	/// Represents a collection of <see cref="VirtualTreeNode"/> objects.
+	/// </summary>
 	public class VirtualTreeNodeCollection
 		: ObservableCollection<VirtualTreeNode>
 	{
@@ -23,6 +26,11 @@ namespace skwas.Forms
 			_owner = owner;
 		}
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="VirtualTreeNode"/> class with the specified label text.
+		/// </summary>
+		/// <param name="text">The label <see cref="P:skwas.Forms.VirtualTreeNode.Text"/> of the new tree node. </param>
+		/// <returns>The newly created <see cref="VirtualTreeNode"/>.</returns>
 		public VirtualTreeNode Add(string text)
 		{
 			var node = new VirtualTreeNode(text);
@@ -30,6 +38,11 @@ namespace skwas.Forms
 			return node;
 		}
 
+		/// <summary>
+		/// Moves specified <see cref="VirtualTreeNode"/> by an offset of its current index in the collection.
+		/// </summary>
+		/// <param name="node">The node to move.</param>
+		/// <param name="offset">The offset to move the node by.</param>
 		public void Move(VirtualTreeNode node, int offset)
 		{
 			var oldIndex = IndexOf(node);
@@ -131,6 +144,11 @@ namespace skwas.Forms
 				_baseCollection[index] = item;
 		}
 
+		/// <summary>
+		/// Moves the item at the specified index to a new location in the collection.
+		/// </summary>
+		/// <param name="oldIndex">The zero-based index specifying the location of the item to be moved.</param>
+		/// <param name="newIndex">The zero-based index specifying the new location of the item.</param>
 		protected override void MoveItem(int oldIndex, int newIndex)
 		{
 			var item = this[oldIndex];
