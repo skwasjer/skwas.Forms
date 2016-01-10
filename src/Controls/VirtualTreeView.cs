@@ -10,8 +10,9 @@ using System.Windows.Forms.VisualStyles;
 namespace skwas.Forms
 {
 	/// <summary>
-	/// Displays a hierarchical collection of labeled items, each represented by a <see cref="VirtualTreeNode"/>.
+	/// Displays a hierarchical collection of labeled items, each represented by a <see cref="VirtualTreeNode"/>. The tree nodes are not actually added into the actual tree view until needed (cached internally). This allows a large number of nodes to be added to the tree view very fast, as opposed to the stock <see cref="TreeView"/>.
 	/// </summary>
+	/// <remarks>All nodes are still required to be added to the tree view, the current implementation is not ment for 'dynamic' loading/binding.</remarks>
 	public class VirtualTreeView
 		: TreeView
 	{

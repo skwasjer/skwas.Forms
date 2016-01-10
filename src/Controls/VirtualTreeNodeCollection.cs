@@ -66,7 +66,6 @@ namespace skwas.Forms
 			if (nodes != null && nodes != this)
 				nodes.LoadIntoTree();
 
-//			if (IsLoadedIntoTreeView) return;
 			if (_hasExpandedOnce) return;
 
 			var interactive = IsLoadedIntoTreeView && Count > 50;
@@ -78,9 +77,11 @@ namespace skwas.Forms
 				_owner.TreeView.BeginUpdate();
 			}
 
-			_baseCollection = _owner == _owner.TreeView.InternalRoot
-				? ((TreeView)_owner.TreeView).Nodes 
-				: ((TreeNode)_owner).Nodes;
+			_baseCollection = _baseCollection ?? (
+				_owner == _owner.TreeView.InternalRoot
+					? ((TreeView)_owner.TreeView).Nodes 
+					: ((TreeNode)_owner).Nodes
+				);
 			try
 			{
 
@@ -106,15 +107,24 @@ namespace skwas.Forms
 
 		}
 		
+		/// <summary>
+		/// Gets whether the current collection is the root collection for the tree view, instead of a node.
+		/// </summary>
 		private bool IsRootCollection => _owner.Parent == null && _owner == _owner.TreeView?.InternalRoot;
 
+		/// <summary>
+		/// Adds a dummy to the tree view.
+		/// </summary>
 		private void AddDummy()
 		{
-			// This is the first added item. Add a + sign.
-			var dummy = new VirtualTreeNode(VirtualExpandDummy) { Name = VirtualExpandDummy };
-			_baseCollection = IsRootCollection ? ((TreeView)_owner.TreeView)?.Nodes : ((TreeNode)_owner).Nodes;
-			if (Count > 0 && (_baseCollection?.Count ?? -1) == 0)
-				_baseCollection?.Add(dummy);
+			_baseCollection = _baseCollection ?? (IsRootCollection ? ((TreeView)_owner.TreeView)?.Nodes : ((TreeNode)_owner).Nodes);
+			if (Count > 0 && _baseCollection != null && _baseCollection.Count == 0)
+			{
+				// This is the first added item. Add a + sign.
+				_baseCollection.Add(
+					new VirtualTreeNode(VirtualExpandDummy) { Name = VirtualExpandDummy }
+				);
+			}
 		}
 
 		#region Overrides of ObservableCollection<VirtualTreeNode>
@@ -177,7 +187,7 @@ namespace skwas.Forms
 
 			if (_hasExpandedOnce)
 				_baseCollection.Remove(removedItem);
-			else if (Count == 0)
+			else if (Count == 0 && _baseCollection != null)
 			{
 				// Remove + if it is set.
 				TreeNode firstNode;
