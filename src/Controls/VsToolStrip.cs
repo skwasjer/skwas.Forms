@@ -55,11 +55,11 @@ namespace skwas.Forms
 		/// </summary>
 		private void InitPaint()
 		{
-			_backgroundBrush1?.Dispose();
-			_backgroundBrush2?.Dispose();
-
 			// Can't create gradient brushes if we don't have a valid rect. Size.IsEmpty won't suffice, we need both height and width.
 			if (_backgroundRect.Width == 0 || _backgroundRect.Height == 0) return;
+
+			_backgroundBrush1?.Dispose();
+			_backgroundBrush2?.Dispose();
 
 			var color = SystemColors.ActiveCaption;
 
@@ -96,11 +96,8 @@ namespace skwas.Forms
 				_linearRect2.Height -= _linearRect1.Height - 1;
 				_linearRect2.Y = _linearRect1.Height - 1;
 
-				if (_backgroundRect.Width > 0 && _backgroundRect.Height > 0)
-				{
-					InitPaint();
-					Invalidate();
-				}
+				InitPaint();
+				Invalidate();
 			}
 
 			base.OnLayout(e);
