@@ -18,8 +18,6 @@ namespace skwas.Forms
 	{
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private VirtualTreeNodeCollection _nodes;
-		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		private VirtualTreeView _treeview;
 		
 		/// <summary>
 		/// Initializes a new instance of <see cref="VirtualTreeNode"/>.
@@ -167,11 +165,7 @@ namespace skwas.Forms
 		/// </summary>
 		[Browsable(false)]
 		[EditorBrowsable(EditorBrowsableState.Never)]
-		public new VirtualTreeView TreeView
-		{
-			get { return _treeview; }
-			internal set { _treeview = value; }
-		}
+		public new VirtualTreeView TreeView { get; internal set; }
 
 		/// <summary>
 		/// Gets the collection of <see cref="VirtualTreeNode"/> objects assigned to the current tree node.
