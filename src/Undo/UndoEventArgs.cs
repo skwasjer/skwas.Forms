@@ -12,7 +12,7 @@ namespace skwas.Forms
 		/// Initializes a new instance of <see cref="UndoEventArgs"/>.
 		/// </summary>
 		/// <param name="undoAction">The undo action.</param>
-		public UndoEventArgs(UndoAction undoAction)
+		public UndoEventArgs(IUndoAction undoAction)
 		{
 			if (undoAction == null)
 				throw new ArgumentNullException(nameof(undoAction));
@@ -22,6 +22,6 @@ namespace skwas.Forms
 		/// <summary>
 		/// Gets the undo action.
 		/// </summary>
-		public UndoAction Action { get; }
+		public IUndoAction Action { get; }
 	}
 }

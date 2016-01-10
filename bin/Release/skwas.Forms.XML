@@ -26,6 +26,36 @@
             The command line arguments.
             </summary>
         </member>
+        <member name="T:skwas.Forms.IUndoAction">
+            <summary>
+            Represents a replayable (redo) or revertable (undo) action.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.IUndoAction.Description">
+            <summary>
+            Gets a common description.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.IUndoAction.UndoDescription">
+            <summary>
+            Gets the undo description.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.IUndoAction.RedoDescription">
+            <summary>
+            Gets the redo description.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.IUndoAction.Undo">
+            <summary>
+            Performs the undo. Calling this method directly will not modify the undo/redo stack, and can cause an action to be replayed twice.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.IUndoAction.Redo">
+            <summary>
+            Performs the redo. Calling this method directly will not modify the undo/redo stack, and can cause an action to be replayed twice.
+            </summary>
+        </member>
         <member name="T:skwas.Forms.ExtendedWindowStyles">
             <summary>
             Describes extended styles associated with a window.
@@ -435,12 +465,12 @@
         </member>
         <member name="M:skwas.Forms.UndoAction.Undo">
             <summary>
-            Performs the undo. Warning: Calling this method directly may cause the undo stack to become corrupted.
+            Performs the undo. Calling this method directly will not modify the undo/redo stack, and can cause an action to be replayed twice.
             </summary>
         </member>
         <member name="M:skwas.Forms.UndoAction.Redo">
             <summary>
-            Performs the redo. Warning: Calling this method directly may cause the undo stack to become corrupted.
+            Performs the redo. Calling this method directly will not modify the undo/redo stack, and can cause an action to be replayed twice.
             </summary>
         </member>
         <member name="M:skwas.Forms.UndoAction.OnUndo">
@@ -466,7 +496,7 @@
             Represents the event arguments for an undo/redo action.
             </summary>
         </member>
-        <member name="M:skwas.Forms.UndoEventArgs.#ctor(skwas.Forms.UndoAction)">
+        <member name="M:skwas.Forms.UndoEventArgs.#ctor(skwas.Forms.IUndoAction)">
             <summary>
             Initializes a new instance of <see cref="T:skwas.Forms.UndoEventArgs"/>.
             </summary>
@@ -542,7 +572,7 @@
             Gets the actions on the redo stack.
             </summary>
         </member>
-        <member name="M:skwas.Forms.UndoManager.Add(skwas.Forms.UndoAction)">
+        <member name="M:skwas.Forms.UndoManager.Add(skwas.Forms.IUndoAction)">
             <summary>
             Adds a new action to the undo stack and clears the redo stack.
             </summary>

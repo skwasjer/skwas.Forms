@@ -6,7 +6,7 @@ namespace skwas.Forms
 	/// Represents the base class for a replayable (redo) or revertable (undo) action.
 	/// </summary>
 	[DebuggerDisplay("Description = {Description}")]
-	public abstract class UndoAction
+	public abstract class UndoAction : IUndoAction
 	{
 		/// <summary>
 		/// Initializes a new instance of <see cref="UndoAction"/>.
@@ -49,7 +49,7 @@ namespace skwas.Forms
 		public object AffectedInstance { get; }
 
 		/// <summary>
-		/// Performs the undo. Warning: Calling this method directly may cause the undo stack to become corrupted.
+		/// Performs the undo. Calling this method directly will not modify the undo/redo stack, and can cause an action to be replayed twice.
 		/// </summary>
 		public void Undo()
 		{
@@ -57,7 +57,7 @@ namespace skwas.Forms
 		}
 
 		/// <summary>
-		/// Performs the redo. Warning: Calling this method directly may cause the undo stack to become corrupted.
+		/// Performs the redo. Calling this method directly will not modify the undo/redo stack, and can cause an action to be replayed twice.
 		/// </summary>
 		public void Redo()
 		{

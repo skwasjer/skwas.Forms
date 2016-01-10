@@ -81,18 +81,18 @@ namespace skwas.Forms
 		/// <summary>
 		/// Gets the actions on the undo stack.
 		/// </summary>
-		public Stack<UndoAction> UndoActions { get; } = new Stack<UndoAction>();
+		public Stack<IUndoAction> UndoActions { get; } = new Stack<IUndoAction>();
 
 		/// <summary>
 		/// Gets the actions on the redo stack.
 		/// </summary>
-		public Stack<UndoAction> RedoActions { get; } = new Stack<UndoAction>();
+		public Stack<IUndoAction> RedoActions { get; } = new Stack<IUndoAction>();
 
 		/// <summary>
 		/// Adds a new action to the undo stack and clears the redo stack.
 		/// </summary>
 		/// <param name="action"></param>
-		public void Add(UndoAction action)
+		public void Add(IUndoAction action)
 		{
 			lock (LockObject)
 			{
