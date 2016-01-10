@@ -62,11 +62,10 @@ namespace skwas.Forms
 
 		internal void LoadIntoTree()
 		{
+			if (_hasExpandedOnce) return;
 			var nodes = (_owner.Parent?.Nodes ?? _owner.TreeView.Nodes);
 			if (nodes != null && nodes != this)
 				nodes.LoadIntoTree();
-
-			if (_hasExpandedOnce) return;
 
 			var interactive = IsLoadedIntoTreeView && Count > 50;
 			var busyCursor = false;
@@ -207,8 +206,7 @@ namespace skwas.Forms
 
 			base.ClearItems();
 
-			if (_hasExpandedOnce) _baseCollection.Clear();
-			_hasExpandedOnce = false;
+			_baseCollection?.Clear();
 		}
 
 		#endregion
