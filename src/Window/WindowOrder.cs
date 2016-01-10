@@ -1,5 +1,8 @@
 ﻿namespace skwas.Forms
 {
+	/// <summary>
+	/// Describes options to move a window in z-order.
+	/// </summary>
 	public enum WindowOrder
 	{
 		/// <summary>
