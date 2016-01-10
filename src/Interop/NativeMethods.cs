@@ -232,5 +232,7 @@ namespace skwas.Forms
 
 		[DllImport("user32")]
 		public static extern bool IsWindow(HandleRef hWnd);
+
+		public const uint MF_BYPOSITION = 0x00000400;
 	}
 }

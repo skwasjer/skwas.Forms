@@ -23,8 +23,9 @@ Name | Related | Description
 || [UndoAction](src/Undo/UndoAction.cs) | Abstract base class for creating undo/redo actions.
 || [UndoSetValueAction](src/Undo/UndoSetValueAction.cs) | Undo/redo action for setting a property on an instance.
 || [UndoMethodAction](src/Undo/UndoMethodAction.cs) | Undo/redo action to call custom methods.
-[Window](src/Window/Window.cs) || Work in progress. A IWin32Window implementation that supports both managed and native windows, and provides access to alot of information about the window, the process it belongs to, etc. Provides access to several native API's via a similar interface. Very useful for control authors.
+[Window](src/Window/Window.cs) || Work in progress. A [IWin32Window](https://msdn.microsoft.com/en-us/library/system.windows.forms.IWin32Window.aspx) implementation that supports both managed and native windows, and provides access to alot of information about the window, the process it belongs to, etc. Provides access to several native API's via a similar interface. Very useful for control authors.
 [SingleApplicationInstance](src/SingleApplicationInstance.cs) || A component to ensure an application has always at most one instance running. Provides a way to send startup information (command line arguments or otherwise) to the already running instance.
+[MenuItemExtender](src/Components/MenuItemExtender.cs) || Component that provides ImageList/ImageIndex support to .NET's [MainMenu](https://msdn.microsoft.com/en-us/library/system.windows.forms.mainmenu.aspx)/[ContextMenu](https://msdn.microsoft.com/en-us/library/system.windows.forms.contextmenu.aspx) components.
 
 #### Utilities
 

@@ -146,5 +146,8 @@ namespace skwas.Forms
 
 		[DllImport("user32")]
 		public static extern IntPtr SetParent(HandleRef hWndChild, HandleRef hWndNewParent);
+
+		[DllImport("gdi32", SetLastError = true)]
+		public static extern bool DeleteObject(IntPtr hObject);
 	}
 }

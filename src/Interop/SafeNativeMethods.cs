@@ -77,5 +77,8 @@ namespace skwas.Forms
 
 		[DllImport("uxtheme", CharSet = CharSet.Unicode)]
 		public static extern int SetWindowTheme(IntPtr hWnd, string textSubAppName, string textSubIdList);
+
+		[DllImport("user32", SetLastError = true)]
+		public static extern bool SetMenuItemBitmaps(IntPtr hMenu, int uPosition, uint uFlags, IntPtr hBitmapUnchecked, IntPtr hBitmapChecked);
 	}
 }
