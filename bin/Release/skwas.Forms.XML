@@ -26,6 +26,113 @@
             The command line arguments.
             </summary>
         </member>
+        <member name="T:skwas.Forms.MenuItemExtender">
+            <summary>
+            Provides ImageList/ImageIndex support to the <see cref="T:System.Windows.Forms.MainMenu"/> and <see cref="T:System.Windows.Forms.ContextMenu"/> components.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.MenuItemExtender._items">
+            <summary>
+            Tracks menu items and the associated item info (image index, native handle).
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.MenuItemExtender._imageList">
+            <summary>
+            The image list to use.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.MenuItemExtender._isSupported">
+            <summary>
+            true when images are supported on menu items.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.MenuItemExtender.#ctor">
+            <summary>
+            Initializes a new instance of the MenuItemExtender class.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.MenuItemExtender.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Component"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
+        </member>
+        <member name="P:skwas.Forms.MenuItemExtender.ImageList">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.Forms.ImageList"/> to use.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.MenuItemExtender.CanExtend(System.Object)">
+            <summary>
+            Specifies whether this object can provide its extender properties to the specified object.
+            </summary>
+            <returns>
+            true if this object can provide extender properties to the specified object; otherwise, false.
+            </returns>
+            <param name="extendee">The <see cref="T:System.Object"/> to receive the extender properties. </param>
+        </member>
+        <member name="M:skwas.Forms.MenuItemExtender.System#ComponentModel#IExtenderProvider#CanExtend(System.Object)">
+            <summary>
+            Specifies whether this object can provide its extender properties to the specified object.
+            </summary>
+            <returns>
+            true if this object can provide extender properties to the specified object; otherwise, false.
+            </returns>
+            <param name="extendee">The <see cref="T:System.Object"/> to receive the extender properties. </param>
+        </member>
+        <member name="M:skwas.Forms.MenuItemExtender.GetImageIndex(System.Windows.Forms.MenuItem)">
+            <summary>
+            Gets the image index, if any, associated with specified menu item.
+            </summary>
+            <param name="menuItem"></param>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.MenuItemExtender.SetImageIndex(System.Windows.Forms.MenuItem,System.Int32)">
+            <summary>
+            Sets the image index for specified menu item.
+            </summary>
+            <param name="menuItem"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:skwas.Forms.MenuItemExtender.SetBitmap(System.Windows.Forms.MenuItem)">
+            <summary>
+            Sets the native bitmap handle on a menu item.
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:skwas.Forms.MenuItemExtender.UpdateBitmap(skwas.Forms.MenuItemExtender.ItemInfo)">
+            <summary>
+            Updates a menu item with the native bitmap handle.
+            </summary>
+            <param name="info"></param>
+        </member>
+        <member name="M:skwas.Forms.MenuItemExtender.Refresh">
+            <summary>
+            Updates the bitmap on all tracked menu items.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.MenuItemExtender.menuItem_Disposed(System.Object,System.EventArgs)">
+            <summary>
+            Called when a menu item is disposed. Removes the item from our collection.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:skwas.Forms.MenuItemExtender.ItemInfo.Item">
+            <summary>
+            Gets or sets the menu item.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.MenuItemExtender.ItemInfo.ImageIndex">
+            <summary>
+            Gets or sets the image index.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.MenuItemExtender.ItemInfo.NativeHandle">
+            <summary>
+            The native bitmap handle of the icon.
+            </summary>
+        </member>
         <member name="T:skwas.Forms.IUndoAction">
             <summary>
             Represents a replayable (redo) or revertable (undo) action.
@@ -1692,6 +1799,11 @@
             Initializes a new instance of <see cref="T:skwas.Forms.WindowException"/>.
             </summary>
             <param name="message">The message.</param>
+        </member>
+        <member name="T:skwas.Forms.WindowOrder">
+            <summary>
+            Describes options to move a window in z-order.
+            </summary>
         </member>
         <member name="F:skwas.Forms.WindowOrder.NoTopMost">
             <summary>
