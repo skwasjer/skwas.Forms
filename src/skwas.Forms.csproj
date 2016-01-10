@@ -79,6 +79,7 @@
     <Compile Include="Components\MenuItemExtender.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="NavigationManager.cs" />
     <Compile Include="Undo\IUndoAction.cs" />
     <Compile Include="Window\ExtendedWindowStyles.cs" />
     <Compile Include="Controls\ShieldButton.cs">
