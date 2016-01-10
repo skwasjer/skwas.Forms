@@ -133,6 +133,93 @@
             The native bitmap handle of the icon.
             </summary>
         </member>
+        <member name="T:skwas.Forms.NavigationManager`1">
+            <summary>
+            The navigation manager keeps track the current position in a list, used to provide history back/forward functionality. The forward history is reset every time a new object is added to the list.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.NavigationManager`1.History">
+            <summary>
+            The internal history.
+            </summary>
+        </member>
+        <member name="F:skwas.Forms.NavigationManager`1._index">
+            <summary>
+            Tracks the current position.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.NavigationManager`1.Add(`0)">
+            <summary>
+            Adds a new item of <typeparamref name="T"/> to the navigation history, and resets the forward history.
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="P:skwas.Forms.NavigationManager`1.CurrentIndex">
+            <summary>
+            Returns the current index.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.NavigationManager`1.CanGoBack">
+            <summary>
+            Indicates whether the current index is not at the start.
+            </summary>
+        </member>
+        <member name="P:skwas.Forms.NavigationManager`1.CanGoForward">
+            <summary>
+            Indicates whether the current index is not at the end.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.NavigationManager`1.Back">
+            <summary>
+            Moves back one place and returns the new active item or null if at the start.
+            </summary>
+            <returns>The new active item or null if at the start.</returns>
+        </member>
+        <member name="M:skwas.Forms.NavigationManager`1.Forward">
+            <summary>
+            Moves forward one place and returns the new active item or null if at the end.
+            </summary>
+            <returns>The new active item or null if at the end.</returns>
+        </member>
+        <member name="P:skwas.Forms.NavigationManager`1.CurrentItem">
+            <summary>
+            Gets the current item.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.NavigationManager`1.Clear">
+            <summary>
+            Clears the history.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.NavigationManager`1.Contains(`0)">
+            <summary>
+            Returns true if the item is in the history one or more times.
+            </summary>
+            <param name="item">The item to check.</param>
+            <returns>true if the <paramref name="item"/> is in the history list.</returns>
+        </member>
+        <member name="P:skwas.Forms.NavigationManager`1.Count">
+            <summary>
+            Returns the size of the history.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.NavigationManager`1.Remove(`0)">
+            <summary>
+            Removes all occurrences of the item from the history. If the item was active, the previous item is selected.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:skwas.Forms.NavigationManager`1.System#Collections#Generic#IEnumerable{T}#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the <see cref="T:skwas.Forms.NavigationManager`1"/>.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.NavigationManager`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the <see cref="T:skwas.Forms.NavigationManager`1"/>.
+            </summary>
+        </member>
         <member name="T:skwas.Forms.IUndoAction">
             <summary>
             Represents a replayable (redo) or revertable (undo) action.
@@ -340,12 +427,14 @@
             Returns the command line arguments in an array.
             </summary>
             <param name="commandLine">The raw command line.</param>
+            <returns>Returns the command line arguments in an array. If <paramref name="commandLine"/> is null or empty, returns null.</returns>
         </member>
         <member name="M:skwas.Forms.CommandLine.Pack(System.String[])">
             <summary>
             Packs an array of command line arguments into a single line. If an argument contains a space, the argument is enclosed in double quotes (").
             </summary>
             <param name="args">The command line arguments to pack.</param>
+            <returns>Returns the arguments as a single string. If <paramref name="args"/> is null or empty, returns null.</returns>
         </member>
         <member name="T:skwas.Forms.LocalClipboard">
             <summary>
