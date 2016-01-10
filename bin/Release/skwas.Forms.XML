@@ -1016,6 +1016,16 @@
             Gets whether the node is already loaded into the treeview.
             </summary>
         </member>
+        <member name="P:skwas.Forms.VirtualTreeNodeCollection.IsRootCollection">
+            <summary>
+            Gets whether the current collection is the root collection for the tree view, instead of a node.
+            </summary>
+        </member>
+        <member name="M:skwas.Forms.VirtualTreeNodeCollection.AddDummy">
+            <summary>
+            Adds a dummy to the tree view.
+            </summary>
+        </member>
         <member name="M:skwas.Forms.VirtualTreeNodeCollection.InsertItem(System.Int32,skwas.Forms.VirtualTreeNode)">
             <summary>
             Inserts an element into the <see cref="T:System.Collections.ObjectModel.Collection`1"/> at the specified index.
@@ -1064,8 +1074,9 @@
         </member>
         <member name="T:skwas.Forms.VirtualTreeView">
             <summary>
-            Displays a hierarchical collection of labeled items, each represented by a <see cref="T:skwas.Forms.VirtualTreeNode"/>.
+            Displays a hierarchical collection of labeled items, each represented by a <see cref="T:skwas.Forms.VirtualTreeNode"/>. The tree nodes are not actually added into the actual tree view until needed (cached internally). This allows a large number of nodes to be added to the tree view very fast, as opposed to the stock <see cref="T:System.Windows.Forms.TreeView"/>.
             </summary>
+            <remarks>All nodes are still required to be added to the tree view, the current implementation is not ment for 'dynamic' loading/binding.</remarks>
         </member>
         <member name="M:skwas.Forms.VirtualTreeView.#ctor">
             <summary>
