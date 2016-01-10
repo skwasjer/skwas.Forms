@@ -14,8 +14,11 @@ namespace skwas.Forms
 		/// Returns the command line arguments in an array.
 		/// </summary>
 		/// <param name="commandLine">The raw command line.</param>
+		/// <returns>Returns the command line arguments in an array. If <paramref name="commandLine"/> is null or empty, returns null.</returns>
 		public static string[] Parse(string commandLine)
 		{
+			if (string.IsNullOrEmpty(commandLine)) return null;
+
 			// CommandLineToArgvW expects executable name + arguments, so add foo.exe
 			int argc;
 			var argv = SafeNativeMethods.CommandLineToArgvW("foo.exe " + commandLine, out argc);
@@ -44,8 +47,11 @@ namespace skwas.Forms
 		/// Packs an array of command line arguments into a single line. If an argument contains a space, the argument is enclosed in double quotes (").
 		/// </summary>
 		/// <param name="args">The command line arguments to pack.</param>
+		/// <returns>Returns the arguments as a single string. If <paramref name="args"/> is null or empty, returns null.</returns>
 		public static string Pack(params string[] args)
 		{
+			if (args == null || args.Length == 0) return null;
+
 			// In case of whitespace, add quotes.
 			return string.Join(" ",
 				args
