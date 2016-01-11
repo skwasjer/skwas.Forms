@@ -146,17 +146,17 @@ namespace skwas.Forms
 		/// <summary>
 		/// Gets the window style attributes.
 		/// </summary>
-		public virtual WindowStyles WindowStyles => GetWindowStyles(this);
+		public virtual WindowStyles WindowStyles => this.GetWindowStyles();
 
 		/// <summary>
 		/// Gets the window style attributes.
 		/// </summary>
-		public ExtendedWindowStyles ExtendedWindowStyles => GetExtendedWindowStyles(this);
+		public ExtendedWindowStyles ExtendedWindowStyles => this.GetExtendedWindowStyles();
 
 		/// <summary>
 		/// Gets the control style attributes.
 		/// </summary>
-		public int ControlStyles => GetControlStyles(this);
+		public int ControlStyles => GetControlStyles(Handle);
 
 		/// <summary>
 		/// Gets the coordinates of the upper-left corner of the window relative to the main desktop.
@@ -165,12 +165,13 @@ namespace skwas.Forms
 		{
 			get
 			{
-				return GetLocation(this);
+				return GetLocation(Handle);
 			}
 			set
 			{
-				var sz = Size;
-				UnsafeNativeMethods.MoveWindow(new HandleRef(this, Handle), value.X, value.Y, sz.Width, sz.Height, false);
+				SetLocation(Handle, value);
+				//var sz = Size;
+				//UnsafeNativeMethods.MoveWindow(new HandleRef(this, Handle), value.X, value.Y, sz.Width, sz.Height, false);
 			}
 		}
 
@@ -181,24 +182,29 @@ namespace skwas.Forms
 		{
 			get
 			{
-				return GetSize(this);
+				return GetSize(Handle);
 			}
 			set
 			{
-				var pt = Location;
-				UnsafeNativeMethods.MoveWindow(new HandleRef(this, Handle), pt.X, pt.Y, value.Width, value.Height, false);
+				SetSize(Handle, value);
+				//var pt = Location;
+				//UnsafeNativeMethods.MoveWindow(new HandleRef(this, Handle), pt.X, pt.Y, value.Width, value.Height, false);
 			}
 		}
 
 		/// <summary>
 		/// Gets the bounds of the window.
 		/// </summary>
-		public Rectangle Bounds => GetBounds(this);
+		public Rectangle Bounds
+		{
+			get { return GetBounds(Handle); }
+			set { SetBounds(Handle, value); }
+		}
 
 		/// <summary>
 		/// Gets the height and width of the window.
 		/// </summary>
-		public Size ClientSize => GetClientSize(this);
+		public Size ClientSize => GetClientSize(Handle);
 
 		/// <summary>
 		/// Gets wether the window is still valid (iow. still exists on the local computer)
@@ -303,30 +309,29 @@ namespace skwas.Forms
 		/// <summary>
 		/// Returns the window caption text for specified handle.
 		/// </summary>
-		/// <param name="handle">The window handle to query.</param>
+		/// <param name="handle">The window handle.</param>
 		/// <returns>The window caption text for specified handle.</returns>
 		public static string GetWindowText(IWin32Window handle)
 		{
 			if (handle == null || handle.Handle == IntPtr.Zero) return null;
 
-			var h = new HandleRef(Ref, handle.Handle);
-			var length = SafeNativeMethods.GetWindowTextLength(h) + 1;
+			var length = SafeNativeMethods.GetWindowTextLength(handle.Handle) + 1;
 
 			var sb = new StringBuilder(length, length);
-			UnsafeNativeMethods.GetWindowText(h, sb, sb.MaxCapacity);
+			UnsafeNativeMethods.GetWindowText(handle.Handle, sb, sb.MaxCapacity);
 			return sb.ToString();
 		}
 
 		/// <summary>
 		/// Returns the window class name for specified handle.
 		/// </summary>
-		/// <param name="handle">The window handle to query.</param>
+		/// <param name="handle">The window handle.</param>
 		/// <returns>The window class name for specified handle.</returns>
 		public static string GetClassName(IWin32Window handle)
 		{
 			if (handle == null || handle.Handle == IntPtr.Zero) return null;
 			var sb = new StringBuilder(260, 260);
-			UnsafeNativeMethods.GetClassName(new HandleRef(handle, handle.Handle), sb, sb.MaxCapacity);
+			UnsafeNativeMethods.GetClassName(handle.Handle, sb, sb.MaxCapacity);
 			return sb.ToString();
 		}
 
@@ -353,53 +358,74 @@ namespace skwas.Forms
 		/// <summary>
 		/// Returns the window style attributes for specified handle.
 		/// </summary>
-		/// <param name="window">The window handle to query.</param>
-		public static WindowStyles GetWindowStyles(IWin32Window window)
-		{
-			return window == null ? 0 : GetWindowStyles(window.Handle);
-		}
-
-		/// <summary>
-		/// Returns the window style attributes for specified handle.
-		/// </summary>
-		/// <param name="handle">The window handle to query.</param>
+		/// <param name="handle">The window handle.</param>
 		public static WindowStyles GetWindowStyles(IntPtr handle)
 		{
 			if (handle == IntPtr.Zero) return 0;
 
-			return (WindowStyles)(UnsafeNativeMethods.GetWindowLong(new HandleRef(Ref, handle), NativeMethods.GWL_STYLE).ToInt64() & 0xFFFF0000);
+			return (WindowStyles)(UnsafeNativeMethods.GetWindowLong(handle, NativeMethods.GWL_STYLE).ToInt64() & 0xFFFF0000);
 		}
 
 		/// <summary>
-		/// Returns the window style attributes for specified handle.
+		/// Sets the window style attributes for specified window.
 		/// </summary>
-		/// <param name="window">The window handle to query.</param>
-		public static ExtendedWindowStyles GetExtendedWindowStyles(IWin32Window window)
+		/// <param name="handle">The window handle.</param>
+		/// <param name="styles">The new window styles.</param>
+		/// <returns>true if successful, false otherwise.</returns>
+		public static void SetWindowStyles(IntPtr handle, WindowStyles styles)
 		{
-			return window == null ? 0 : GetExtendedWindowStyles(window.Handle);
+			if (handle == IntPtr.Zero) return;
+
+			UnsafeNativeMethods.SetWindowLong(handle, NativeMethods.GWL_STYLE, (int)styles);
 		}
 
 		/// <summary>
 		/// Returns the window style attributes for specified handle.
 		/// </summary>
-		/// <param name="handle">The window handle to query.</param>
+		/// <param name="handle">The window handle.</param>
 		public static ExtendedWindowStyles GetExtendedWindowStyles(IntPtr handle)
 		{
 			if (handle == IntPtr.Zero) return 0;
 
-			return (ExtendedWindowStyles)UnsafeNativeMethods.GetWindowLong(new HandleRef(Ref, handle), NativeMethods.GWL_EXSTYLE).ToInt64();
+			return (ExtendedWindowStyles)UnsafeNativeMethods.GetWindowLong(handle, NativeMethods.GWL_EXSTYLE).ToInt64();
+		}
+
+		/// <summary>
+		/// Sets the extended window style attributes for specified window.
+		/// </summary>
+		/// <param name="handle">The window handle.</param>
+		/// <param name="styles">The new extended window styles.</param>
+		/// <returns>true if successful, false otherwise.</returns>
+		public static void SetExtendedWindowStyles(IntPtr handle, ExtendedWindowStyles styles)
+		{
+			if (handle == IntPtr.Zero) return;
+
+			UnsafeNativeMethods.SetWindowLong(handle, NativeMethods.GWL_EXSTYLE, (int)styles);
 		}
 
 		/// <summary>
 		/// Returns the control style attributes for specified handle.
 		/// </summary>
-		/// <param name="handle">The window handle to query.</param>
+		/// <param name="handle">The window handle.</param>
 		/// <returns></returns>
-		public static int GetControlStyles(IWin32Window handle)
+		public static int GetControlStyles(IntPtr handle)
 		{
-			if (handle == null || handle.Handle == IntPtr.Zero) return 0;
+			if (handle == IntPtr.Zero) return 0;
 
-			return unchecked((int)(UnsafeNativeMethods.GetWindowLong(new HandleRef(handle, handle.Handle), NativeMethods.GWL_STYLE).ToInt64() & 0x0000FFF));
+			return unchecked((int)(UnsafeNativeMethods.GetWindowLong(handle, NativeMethods.GWL_STYLE).ToInt64() & 0xFFFF));
+		}
+
+		/// <summary>
+		/// Sets the control style attributes for specified handle.
+		/// </summary>
+		/// <param name="handle">The window handle.</param>
+		/// <param name="styles">The new control styles.</param>
+		/// <returns></returns>
+		public static void SetControlStyles(IntPtr handle, int styles)
+		{
+			if (handle == IntPtr.Zero) return;
+
+			UnsafeNativeMethods.SetWindowLong(handle, NativeMethods.GWL_EXSTYLE, styles);
 		}
 
 		/// <summary>
@@ -410,9 +436,9 @@ namespace skwas.Forms
 		/// <param name="bounds">The new position and size.</param>
 		/// <param name="flags">Options for showing the window.</param>
 		/// <returns></returns>
-		public static bool SetWindowPos(IWin32Window handle, WindowOrder insertAfter, Rectangle bounds, WindowPosition flags)
+		public static bool SetWindowPos(IntPtr handle, WindowOrder insertAfter, Rectangle bounds, WindowPosition flags)
 		{
-			return UnsafeNativeMethods.SetWindowPos(new HandleRef(handle, handle.Handle), new HandleRef(handle, new IntPtr((int)insertAfter)), bounds.X, bounds.Y, bounds.Width, bounds.Height, (int)flags);
+			return SetWindowPos(handle, new IntPtr((int)insertAfter), bounds, flags);
 		}
 
 		/// <summary>
@@ -423,56 +449,87 @@ namespace skwas.Forms
 		/// <param name="bounds">The new position and size.</param>
 		/// <param name="flags">Options for showing the window.</param>
 		/// <returns></returns>
-		public static bool SetWindowPos(IWin32Window handle, IntPtr insertAfter, Rectangle bounds, WindowPosition flags)
+		public static bool SetWindowPos(IntPtr handle, IntPtr insertAfter, Rectangle bounds, WindowPosition flags)
 		{
-			return UnsafeNativeMethods.SetWindowPos(new HandleRef(handle, handle.Handle), new HandleRef(handle, insertAfter), bounds.X, bounds.Y, bounds.Width, bounds.Height, (int) flags);
+			return UnsafeNativeMethods.SetWindowPos(handle, insertAfter, bounds.X, bounds.Y, bounds.Width, bounds.Height, (int) flags);
 		}
-
 
 		/// <summary>
 		/// Returns the coordinates of the upper-left corner of the window relative to the main desktop for specified handle.
 		/// </summary>
-		/// <param name="handle">The window handle to query.</param>
+		/// <param name="handle">The window handle.</param>
 		/// <returns></returns>
-		public static Point GetLocation(IWin32Window handle)
+		public static Point GetLocation(IntPtr handle)
 		{
 			return GetBounds(handle).Location;
 		}
 
 		/// <summary>
+		/// Sets the coordinates of the upper-left corner of the window relative to the main desktop for specified handle.
+		/// </summary>
+		/// <param name="handle">The window handle.</param>
+		/// <param name="location">The new location.</param>
+		/// <returns></returns>
+		public static bool SetLocation(IntPtr handle, Point location)
+		{
+			return SetWindowPos(handle, IntPtr.Zero, new Rectangle(location, Size.Empty), WindowPosition.NoActivate | WindowPosition.NoZOrder | WindowPosition.NoSize);
+		}
+
+		/// <summary>
 		/// Returns the height and width of the window for specified window handle.
 		/// </summary>
-		/// <param name="handle">The window handle to query.</param>
+		/// <param name="handle">The window handle.</param>
 		/// <returns></returns>
-		public static Size GetSize(IWin32Window handle)
+		public static Size GetSize(IntPtr handle)
 		{
 			return GetBounds(handle).Size;
 		}
 
 		/// <summary>
+		/// Sets the height and width of the window for specified window handle.
+		/// </summary>
+		/// <param name="handle">The window handle.</param>
+		/// <param name="size">The new size.</param>
+		/// <returns></returns>
+		public static bool SetSize(IntPtr handle, Size size)
+		{
+			return SetWindowPos(handle, IntPtr.Zero, new Rectangle(Point.Empty, size), WindowPosition.NoActivate | WindowPosition.NoZOrder | WindowPosition.NoMove);
+		}
+
+		/// <summary>
 		/// Returns the bounds of the window for specified window handle.
 		/// </summary>
-		/// <param name="handle">The window handle to query.</param>
+		/// <param name="handle">The window handle.</param>
 		/// <returns></returns>
-		public static Rectangle GetBounds(IWin32Window handle)
+		public static Rectangle GetBounds(IntPtr handle)
 		{
-			if (handle == null || handle.Handle == IntPtr.Zero) return Rectangle.Empty;
+			if (handle == IntPtr.Zero) return Rectangle.Empty;
 			NativeMethods.RECT rect;
-			return UnsafeNativeMethods.GetWindowRect(new HandleRef(handle, handle.Handle), out rect)
+			return UnsafeNativeMethods.GetWindowRect(handle, out rect)
 				? (Rectangle)rect
 				: Rectangle.Empty;
-		}	
+		}
+
+		/// <summary>
+		/// Sets the bounds of the window for specified window handle.
+		/// </summary>
+		/// <param name="handle">The window handle.</param>
+		/// <param name="bounds">The new bounds.</param>
+		public static bool SetBounds(IntPtr handle, Rectangle bounds)
+		{
+			return SetWindowPos(handle, IntPtr.Zero, bounds, WindowPosition.NoActivate | WindowPosition.NoZOrder);
+		}
 
 		/// <summary>
 		/// Returns the height and width of the window for specified window handle.
 		/// </summary>
-		/// <param name="handle">The window handle to query.</param>
+		/// <param name="handle">The window handle.</param>
 		/// <returns></returns>
-		public static Size GetClientSize(IWin32Window handle)
+		public static Size GetClientSize(IntPtr handle)
 		{
-			if (handle == null || handle.Handle == IntPtr.Zero) return Size.Empty;
+			if (handle == IntPtr.Zero) return Size.Empty;
 			NativeMethods.RECT rect;
-			return UnsafeNativeMethods.GetClientRect(new HandleRef(handle, handle.Handle), out rect) 
+			return UnsafeNativeMethods.GetClientRect(handle, out rect) 
 				? rect.Size 
 				: Size.Empty;
 		}
@@ -484,9 +541,20 @@ namespace skwas.Forms
 		/// <returns>A Point that represents the converted Point, p, in client coordinates.</returns>
 		public Point PointToClient(Point p)
 		{
-			if (Handle == IntPtr.Zero) return p;
+			return PointToClient(Handle, p);
+		}
 
-			var loc = Location;
+		/// <summary>
+		/// Computes the location of the specified screen point into client coordinates.
+		/// </summary>
+		/// <param name="handle">The window handle.</param>
+		/// <param name="p">The screen coordinate Point to convert.</param>
+		/// <returns>A Point that represents the converted Point, p, in client coordinates.</returns>
+		public static Point PointToClient(IntPtr handle, Point p)
+		{
+			if (handle == IntPtr.Zero) return p;
+
+			var loc = GetLocation(handle);
 			p.X -= loc.X;
 			p.Y -= loc.Y;
 			return p;
@@ -497,7 +565,7 @@ namespace skwas.Forms
 		/// </summary>
 		public IntPtr SendMessage(int msg, IntPtr wParam, IntPtr lParam)
 		{
-			return UnsafeNativeMethods.SendMessage(new HandleRef(this, Handle), msg, wParam, lParam);
+			return UnsafeNativeMethods.SendMessage(Handle, msg, wParam, lParam);
 		}
 
 		/// <summary>
@@ -513,7 +581,7 @@ namespace skwas.Forms
 		/// </summary>
 		public bool PostMessage(int msg, IntPtr wParam, IntPtr lParam)
 		{
-			return UnsafeNativeMethods.PostMessage(new HandleRef(this, Handle), msg, wParam, lParam);
+			return UnsafeNativeMethods.PostMessage(Handle, msg, wParam, lParam);
 		}
 
 		/// <summary>
@@ -578,7 +646,7 @@ namespace skwas.Forms
 				return true;
 			};
 
-			UnsafeNativeMethods.EnumChildWindows(new HandleRef(parentWindow, parentWindow.Handle), enumWindows, IntPtr.Zero);
+			UnsafeNativeMethods.EnumChildWindows(parentWindow.Handle, enumWindows, IntPtr.Zero);
 			return windows;
 		}
 

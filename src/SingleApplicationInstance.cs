@@ -210,7 +210,7 @@ namespace skwas.Forms
 				try
 				{
 					Marshal.StructureToPtr(cds, hcds, true);
-					UnsafeNativeMethods.SendMessage(new HandleRef(this, hwnd), NativeMethods.WM_COPYDATA, IntPtr.Zero, hcds);
+					UnsafeNativeMethods.SendMessage(hwnd, NativeMethods.WM_COPYDATA, IntPtr.Zero, hcds);
 				}
 				finally
 				{

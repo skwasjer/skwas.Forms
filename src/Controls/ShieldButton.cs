@@ -50,7 +50,7 @@ namespace skwas.Forms
 			base.OnHandleCreated(e);
 			
 			if (RequiresElevation)
-				UnsafeNativeMethods.SendMessage(new HandleRef(this, Handle), NativeMethods.BCM_SETSHIELD, IntPtr.Zero, new IntPtr(-1));
+				UnsafeNativeMethods.SendMessage(Handle, NativeMethods.BCM_SETSHIELD, IntPtr.Zero, new IntPtr(-1));
 		}
 	}
 }

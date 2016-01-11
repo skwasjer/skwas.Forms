@@ -16,7 +16,7 @@ namespace skwas.Forms
 		public static extern bool CloseHandle(HandleRef hObject);
 
 		[DllImport("user32", CharSet = CharSet.Auto, SetLastError = true)]
-		public static extern int GetWindowTextLength(HandleRef hWnd);
+		public static extern int GetWindowTextLength(IntPtr hWnd);
 
 		[DllImport("user32")]
 		public static extern IntPtr SetActiveWindow(HandleRef hWnd);

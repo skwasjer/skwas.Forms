@@ -11,7 +11,7 @@ namespace skwas.Forms
 		private static readonly object Ref = new object();
 
 		[DllImport("user32", CharSet = CharSet.Auto, SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true)]
-		public static extern int GetWindowText(HandleRef hWnd, StringBuilder text, int maxCount);
+		public static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int maxCount);
 
 		[DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
 		public static extern IntPtr OpenProcess(NativeMethods.ProcessAccess access, bool inherit, int processId);
@@ -26,9 +26,9 @@ namespace skwas.Forms
 		public static extern IntPtr FindWindow([MarshalAs(UnmanagedType.LPTStr)] string className, [MarshalAs(UnmanagedType.LPTStr)] string text);
 
 		[DllImport("user32", CharSet = CharSet.Auto, SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true)]
-		public static extern int GetClassName(HandleRef hWnd, StringBuilder className, int maxCount);
+		public static extern int GetClassName(IntPtr hWnd, StringBuilder className, int maxCount);
 
-		public static IntPtr GetWindowLong(HandleRef hWnd, int nIndex)
+		public static IntPtr GetWindowLong(IntPtr hWnd, int nIndex)
 		{
 			return IntPtr.Size == 4 
 				? (IntPtr)GetWindowLong32(hWnd, nIndex) 
@@ -36,17 +36,31 @@ namespace skwas.Forms
 		}
 
 		[DllImport("user32", EntryPoint = "GetWindowLong", CharSet = CharSet.Auto, SetLastError = true)]
-		private static extern int GetWindowLong32(HandleRef hWnd, int nIndex);
+		private static extern int GetWindowLong32(IntPtr hWnd, int nIndex);
 
 		[SuppressMessage("Microsoft.Interoperability", "CA1400:PInvokeEntryPointsShouldExist")]
 		[DllImport("user32", EntryPoint = "GetWindowLongPtr", CharSet = CharSet.Auto, SetLastError = true)]
-		private static extern IntPtr GetWindowLong64(HandleRef hWnd, int nIndex);
+		private static extern IntPtr GetWindowLong64(IntPtr hWnd, int nIndex);
+
+		public static IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong)
+		{
+			return IntPtr.Size == 4
+				? SetWindowLong32(hWnd, nIndex, dwNewLong)
+				: SetWindowLong64(hWnd, nIndex, dwNewLong);
+		}
+
+		[DllImport("user32", EntryPoint = "SetWindowLong", CharSet = CharSet.Auto, SetLastError = true)]
+		private static extern IntPtr SetWindowLong32(IntPtr hWnd, int nIndex, int dwNewLong);
+
+		[DllImport("user32", EntryPoint = "SetWindowLongPtr", CharSet = CharSet.Auto, SetLastError = true)]
+		private static extern IntPtr SetWindowLong64(IntPtr hWnd, int nIndex, int dwNewLong);
+
 
 		[DllImport("user32", CharSet = CharSet.Auto, ExactSpelling = true)]
-		public static extern bool GetWindowRect(HandleRef hWnd, out NativeMethods.RECT lpRect);
+		public static extern bool GetWindowRect(IntPtr hWnd, out NativeMethods.RECT lpRect);
 
 		[DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
-		public static extern bool GetClientRect(HandleRef hWnd, out NativeMethods.RECT lpRect);
+		public static extern bool GetClientRect(IntPtr hWnd, out NativeMethods.RECT lpRect);
 
 		[DllImport("kernel32", CharSet = CharSet.Auto, SetLastError = true)]
 		public static extern IntPtr CreateToolhelp32Snapshot(NativeMethods.Toolhelp32Flags flags, int processId);
@@ -59,23 +73,23 @@ namespace skwas.Forms
 
 		[DllImport("user32", CharSet = CharSet.Auto, SetLastError = true)]
 		public static extern bool EnumChildWindows(
-			HandleRef hWndParent,
+			IntPtr hWndParent,
 			NativeMethods.EnumThreadWindowsCallback lpEnumFunc,
 			IntPtr extraData
 			);
 
 
 		[DllImport("user32", CharSet = CharSet.Auto)]
-		public static extern bool SetWindowPos(HandleRef hWnd, HandleRef hWndInsertAfter, int x, int y, int cx, int cy, int flags);
+		public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, int flags);
 
 		[DllImport("user32", SetLastError = true)]
-		public static extern IntPtr SendMessage(HandleRef hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+		public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
 		[DllImport("user32", SetLastError = true, CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
-		public static extern IntPtr SendMessage(HandleRef hWnd, int Msg, IntPtr wParam, string lParam);
+		public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, string lParam);
 
 		[DllImport("user32", SetLastError = true)]
-		public static extern bool PostMessage(HandleRef hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+		public static extern bool PostMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
 		public static string GetModuleNameWinNT(int processId)
 		{

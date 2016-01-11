@@ -88,6 +88,7 @@
     <Compile Include="CommandLine.cs" />
     <Compile Include="LocalClipboard.cs" />
     <Compile Include="Interop\SafeNativeMethods.cs" />
+    <Compile Include="Window\IWin32WindowExtensions.cs" />
     <Compile Include="Window\ShowWindow.cs" />
     <Compile Include="SingleApplicationInstance.cs" />
     <Compile Include="Undo\UndoAction.cs" />
