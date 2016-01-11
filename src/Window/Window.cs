@@ -88,7 +88,7 @@ namespace skwas.Forms
 		{
 			get
 			{
-				if (!IsDesktop) return GetWindowText(this);
+				if (!IsDesktop) return GetWindowText(Handle);
 
 				IntPtr pidl;
 				if (SafeNativeMethods.SHGetFolderLocation(new HandleRef(this, Handle), 0, IntPtr.Zero, 0, out pidl) == 0)
@@ -112,7 +112,7 @@ namespace skwas.Forms
 		/// <summary>
 		/// Gets the classname of the window.
 		/// </summary>
-		public virtual string ClassName => GetClassName(this);
+		public virtual string ClassName => GetClassName(Handle);
 
 		/// <summary>
 		/// Gets whether the current window is the desktop window.
@@ -146,17 +146,29 @@ namespace skwas.Forms
 		/// <summary>
 		/// Gets the window style attributes.
 		/// </summary>
-		public virtual WindowStyles WindowStyles => this.GetWindowStyles();
+		public virtual WindowStyles WindowStyles
+		{
+			get { return GetWindowStyles(Handle); }
+			set { SetWindowStyles(Handle, value); }
+		}
 
 		/// <summary>
 		/// Gets the window style attributes.
 		/// </summary>
-		public ExtendedWindowStyles ExtendedWindowStyles => this.GetExtendedWindowStyles();
+		public ExtendedWindowStyles ExtendedWindowStyles
+		{
+			get { return GetExtendedWindowStyles(Handle); }
+			set { SetExtendedWindowStyles(Handle, value); }
+		}
 
 		/// <summary>
 		/// Gets the control style attributes.
 		/// </summary>
-		public int ControlStyles => GetControlStyles(Handle);
+		public int ControlStyles
+		{
+			get { return GetControlStyles(Handle); }
+			set { SetControlStyles(Handle, value); }
+		}
 
 		/// <summary>
 		/// Gets the coordinates of the upper-left corner of the window relative to the main desktop.
@@ -311,14 +323,14 @@ namespace skwas.Forms
 		/// </summary>
 		/// <param name="handle">The window handle.</param>
 		/// <returns>The window caption text for specified handle.</returns>
-		public static string GetWindowText(IWin32Window handle)
+		public static string GetWindowText(IntPtr handle)
 		{
-			if (handle == null || handle.Handle == IntPtr.Zero) return null;
+			if (handle == IntPtr.Zero) return null;
 
-			var length = SafeNativeMethods.GetWindowTextLength(handle.Handle) + 1;
+			var length = SafeNativeMethods.GetWindowTextLength(handle) + 1;
 
 			var sb = new StringBuilder(length, length);
-			UnsafeNativeMethods.GetWindowText(handle.Handle, sb, sb.MaxCapacity);
+			UnsafeNativeMethods.GetWindowText(handle, sb, sb.MaxCapacity);
 			return sb.ToString();
 		}
 
@@ -327,11 +339,11 @@ namespace skwas.Forms
 		/// </summary>
 		/// <param name="handle">The window handle.</param>
 		/// <returns>The window class name for specified handle.</returns>
-		public static string GetClassName(IWin32Window handle)
+		public static string GetClassName(IntPtr handle)
 		{
-			if (handle == null || handle.Handle == IntPtr.Zero) return null;
+			if (handle == IntPtr.Zero) return null;
 			var sb = new StringBuilder(260, 260);
-			UnsafeNativeMethods.GetClassName(handle.Handle, sb, sb.MaxCapacity);
+			UnsafeNativeMethods.GetClassName(handle, sb, sb.MaxCapacity);
 			return sb.ToString();
 		}
 
@@ -425,7 +437,11 @@ namespace skwas.Forms
 		{
 			if (handle == IntPtr.Zero) return;
 
-			UnsafeNativeMethods.SetWindowLong(handle, NativeMethods.GWL_EXSTYLE, styles);
+			styles &= 0xFFFF;
+
+			var oldStyles = ((uint)GetWindowStyles(handle) & 0xFFFF0000);
+
+			UnsafeNativeMethods.SetWindowLong(handle, NativeMethods.GWL_STYLE, (int)(oldStyles | (ushort)styles));
 		}
 
 		/// <summary>

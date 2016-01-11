@@ -17,9 +17,7 @@ namespace skwas.Forms
 		/// <param name="window">The window handle.</param>
 		public static WindowStyles GetWindowStyles(this IWin32Window window)
 		{
-			return window == null
-				? 0
-				: Window.GetWindowStyles(window.Handle);
+			return Window.GetWindowStyles(window?.Handle ?? IntPtr.Zero);
 		}
 
 		/// <summary>
@@ -30,9 +28,7 @@ namespace skwas.Forms
 		/// <returns>true if successful, false otherwise.</returns>
 		public static void SetWindowStyles(this IWin32Window window, WindowStyles styles)
 		{
-			if (window == null) return;
-
-			Window.SetWindowStyles(window.Handle, styles);
+			Window.SetWindowStyles(window?.Handle ?? IntPtr.Zero, styles);
 		}
 
 		/// <summary>
@@ -41,9 +37,7 @@ namespace skwas.Forms
 		/// <param name="window">The window handle.</param>
 		public static ExtendedWindowStyles GetExtendedWindowStyles(this IWin32Window window)
 		{
-			return window == null
-				? 0
-				: Window.GetExtendedWindowStyles(window.Handle);
+			return Window.GetExtendedWindowStyles(window?.Handle ?? IntPtr.Zero);
 		}
 
 		/// <summary>
@@ -54,9 +48,7 @@ namespace skwas.Forms
 		/// <returns>true if successful, false otherwise.</returns>
 		public static void SetExtendedWindowStyles(this IWin32Window window, ExtendedWindowStyles styles)
 		{
-			if (window == null) return;
-
-			Window.SetExtendedWindowStyles(window.Handle, styles);
+			Window.SetExtendedWindowStyles(window?.Handle ?? IntPtr.Zero, styles);
 		}
 
 		/// <summary>
@@ -66,9 +58,7 @@ namespace skwas.Forms
 		/// <returns></returns>
 		public static int GetControlStyles(this IWin32Window window)
 		{
-			return window == null
-				? 0
-				: Window.GetControlStyles(window.Handle);
+			return Window.GetControlStyles(window?.Handle ?? IntPtr.Zero);
 		}
 
 		/// <summary>
@@ -79,9 +69,7 @@ namespace skwas.Forms
 		/// <returns></returns>
 		public static void SetControlStyles(this IWin32Window window, int styles)
 		{
-			if (window == null) return;
-
-			Window.SetControlStyles(window.Handle, styles);
+			Window.SetControlStyles(window?.Handle ?? IntPtr.Zero, styles);
 		}
 
 		/// <summary>
@@ -90,9 +78,7 @@ namespace skwas.Forms
 		/// <param name="window">The window handle.</param>
 		public static Point GetLocation(this IWin32Window window)
 		{
-			return window == null
-				? Point.Empty
-				: Window.GetLocation(window.Handle);
+			return Window.GetLocation(window?.Handle ?? IntPtr.Zero);
 		}
 
 		/// <summary>
@@ -102,7 +88,7 @@ namespace skwas.Forms
 		/// <param name="location">The new location.</param>
 		public static bool SetLocation(this IWin32Window window, Point location)
 		{
-			return window != null && Window.SetLocation(window.Handle, location);
+			return Window.SetLocation(window?.Handle ?? IntPtr.Zero, location);
 		}
 
 		/// <summary>
@@ -111,9 +97,7 @@ namespace skwas.Forms
 		/// <param name="window">The window handle.</param>
 		public static Size GetSize(this IWin32Window window)
 		{
-			return window == null
-				? Size.Empty
-				: Window.GetSize(window.Handle);
+			return Window.GetSize(window?.Handle ?? IntPtr.Zero);
 		}
 
 		/// <summary>
@@ -123,7 +107,7 @@ namespace skwas.Forms
 		/// <param name="size">The new size.</param>
 		public static bool SetSize(this IWin32Window window, Size size)
 		{
-			return window != null && Window.SetSize(window.Handle, size);
+			return Window.SetSize(window?.Handle ?? IntPtr.Zero, size);
 		}
 
 		/// <summary>
@@ -132,9 +116,7 @@ namespace skwas.Forms
 		/// <param name="window">The window handle.</param>
 		public static Rectangle GetBounds(this IWin32Window window)
 		{
-			return window == null
-				? Rectangle.Empty
-				: Window.GetBounds(window.Handle);
+			return Window.GetBounds(window?.Handle ?? IntPtr.Zero);
 		}
 
 		/// <summary>
@@ -144,7 +126,7 @@ namespace skwas.Forms
 		/// <param name="bounds">The new bounds.</param>
 		public static bool SetBounds(this IWin32Window window, Rectangle bounds)
 		{
-			return window != null && Window.SetBounds(window.Handle, bounds);
+			return Window.SetBounds(window?.Handle ?? IntPtr.Zero, bounds);
 		}
 
 		/// <summary>
@@ -153,9 +135,7 @@ namespace skwas.Forms
 		/// <param name="window">The window handle.</param>
 		public static Size GetClientSize(this IWin32Window window)
 		{
-			return window == null
-				? Size.Empty
-				: Window.GetClientSize(window.Handle);
+			return Window.GetClientSize(window?.Handle ?? IntPtr.Zero);
 		}
 
 		/// <summary>
@@ -168,7 +148,7 @@ namespace skwas.Forms
 		/// <returns></returns>
 		public static bool SetWindowPos(this IWin32Window window, WindowOrder insertAfter, Rectangle bounds, WindowPosition flags)
 		{
-			return window != null && Window.SetWindowPos(window.Handle, insertAfter, bounds, flags);
+			return Window.SetWindowPos(window?.Handle ?? IntPtr.Zero, insertAfter, bounds, flags);
 		}
 
 		/// <summary>
@@ -181,7 +161,28 @@ namespace skwas.Forms
 		/// <returns></returns>
 		public static bool SetWindowPos(this IWin32Window window, IntPtr insertAfter, Rectangle bounds, WindowPosition flags)
 		{
-			return window != null && Window.SetWindowPos(window.Handle, insertAfter, bounds, flags);
+			return Window.SetWindowPos(window?.Handle ?? IntPtr.Zero, insertAfter, bounds, flags);
+		}
+
+
+		/// <summary>
+		/// Returns the window caption text for specified handle.
+		/// </summary>
+		/// <param name="window">The window handle.</param>
+		/// <returns>The window caption text for specified handle.</returns>
+		public static string GetWindowText(this IWin32Window window)
+		{
+			return Window.GetWindowText(window?.Handle ?? IntPtr.Zero);
+		}
+
+		/// <summary>
+		/// Returns the window class name for specified handle.
+		/// </summary>
+		/// <param name="window">The window handle.</param>
+		/// <returns>The window class name for specified handle.</returns>
+		public static string GetClassName(this IWin32Window window)
+		{
+			return Window.GetClassName(window?.Handle ?? IntPtr.Zero);
 		}
 	}
 }
