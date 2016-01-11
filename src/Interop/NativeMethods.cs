@@ -233,6 +233,14 @@ namespace skwas.Forms
 		[DllImport("user32")]
 		public static extern bool IsWindow(HandleRef hWnd);
 
+		[DllImport("user32")]
+		public static extern bool ScreenToClient(IntPtr hWnd, ref Point lpPoint);
+
+		[DllImport("user32")]
+		public static extern bool ClientToScreen(IntPtr hWnd, ref Point lpPoint);
+
 		public const uint MF_BYPOSITION = 0x00000400;
+		public const int HI_WORD_MASK = unchecked((int)0xFFFF0000);
+		public const int LO_WORD_MASK = 0xFFFF;
 	}
 }

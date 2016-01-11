@@ -171,13 +171,13 @@ namespace skwas.Forms
 		}
 
 		/// <summary>
-		/// Gets the coordinates of the upper-left corner of the window relative to the main desktop.
+		/// Gets the coordinates of the upper-left corner of the window relative to the screen for top level windows, or relative to the container for child windows.
 		/// </summary>
 		public Point Location
 		{
 			get
 			{
-				return GetLocation(Handle);
+				return GetLocation(Handle, Parent?.Handle);
 			}
 			set
 			{
@@ -375,7 +375,7 @@ namespace skwas.Forms
 		{
 			if (handle == IntPtr.Zero) return 0;
 
-			return (WindowStyles)(UnsafeNativeMethods.GetWindowLong(handle, NativeMethods.GWL_STYLE).ToInt64() & 0xFFFF0000);
+			return (WindowStyles)(UnsafeNativeMethods.GetWindowLong(handle, NativeMethods.GWL_STYLE).ToInt64() & NativeMethods.HI_WORD_MASK);
 		}
 
 		/// <summary>
@@ -388,7 +388,8 @@ namespace skwas.Forms
 		{
 			if (handle == IntPtr.Zero) return;
 
-			UnsafeNativeMethods.SetWindowLong(handle, NativeMethods.GWL_STYLE, (int)styles);
+			// Combine with control styles.
+			UnsafeNativeMethods.SetWindowLong(handle, NativeMethods.GWL_STYLE, ((int)styles & NativeMethods.HI_WORD_MASK) | GetControlStyles(handle));
 		}
 
 		/// <summary>
@@ -424,7 +425,7 @@ namespace skwas.Forms
 		{
 			if (handle == IntPtr.Zero) return 0;
 
-			return unchecked((int)(UnsafeNativeMethods.GetWindowLong(handle, NativeMethods.GWL_STYLE).ToInt64() & 0xFFFF));
+			return unchecked((int)(UnsafeNativeMethods.GetWindowLong(handle, NativeMethods.GWL_STYLE).ToInt64() & NativeMethods.LO_WORD_MASK));
 		}
 
 		/// <summary>
@@ -437,11 +438,8 @@ namespace skwas.Forms
 		{
 			if (handle == IntPtr.Zero) return;
 
-			styles &= 0xFFFF;
-
-			var oldStyles = ((uint)GetWindowStyles(handle) & 0xFFFF0000);
-
-			UnsafeNativeMethods.SetWindowLong(handle, NativeMethods.GWL_STYLE, (int)(oldStyles | (ushort)styles));
+			// Combine with window styles.
+			UnsafeNativeMethods.SetWindowLong(handle, NativeMethods.GWL_STYLE, (int)GetWindowStyles(handle) | (styles & NativeMethods.LO_WORD_MASK));
 		}
 
 		/// <summary>
@@ -471,17 +469,18 @@ namespace skwas.Forms
 		}
 
 		/// <summary>
-		/// Returns the coordinates of the upper-left corner of the window relative to the main desktop for specified handle.
+		/// Returns the coordinates of the upper-left corner of the window relative to the screen, or relative to the specified handle.
 		/// </summary>
 		/// <param name="handle">The window handle.</param>
+		/// <param name="relativeTo">If a window handle is specified, returns the location relative to this window.</param>
 		/// <returns></returns>
-		public static Point GetLocation(IntPtr handle)
+		public static Point GetLocation(IntPtr handle, IntPtr? relativeTo = null)
 		{
-			return GetBounds(handle).Location;
+			return GetBounds(handle, relativeTo).Location;
 		}
 
 		/// <summary>
-		/// Sets the coordinates of the upper-left corner of the window relative to the main desktop for specified handle.
+		/// Sets the coordinates of the upper-left corner of the window relative to the screen.
 		/// </summary>
 		/// <param name="handle">The window handle.</param>
 		/// <param name="location">The new location.</param>
@@ -516,14 +515,19 @@ namespace skwas.Forms
 		/// Returns the bounds of the window for specified window handle.
 		/// </summary>
 		/// <param name="handle">The window handle.</param>
+		/// <param name="relativeTo">If a window handle is specified, returns the location relative to this window.</param>
 		/// <returns></returns>
-		public static Rectangle GetBounds(IntPtr handle)
+		public static Rectangle GetBounds(IntPtr handle, IntPtr? relativeTo = null)
 		{
 			if (handle == IntPtr.Zero) return Rectangle.Empty;
 			NativeMethods.RECT rect;
-			return UnsafeNativeMethods.GetWindowRect(handle, out rect)
+			var rectangle = UnsafeNativeMethods.GetWindowRect(handle, out rect)
 				? (Rectangle)rect
 				: Rectangle.Empty;
+
+			if (relativeTo.HasValue && relativeTo != IntPtr.Zero)
+				rectangle.Location = PointToClient(relativeTo.Value, rectangle.Location);
+			return rectangle;
 		}
 
 		/// <summary>
@@ -570,9 +574,31 @@ namespace skwas.Forms
 		{
 			if (handle == IntPtr.Zero) return p;
 
-			var loc = GetLocation(handle);
-			p.X -= loc.X;
-			p.Y -= loc.Y;
+			NativeMethods.ScreenToClient(handle, ref p);
+			return p;
+		}
+
+		/// <summary>
+		/// Computes the location of the specified screen point into client coordinates.
+		/// </summary>
+		/// <param name="p">The screen coordinate Point to convert.</param>
+		/// <returns>A Point that represents the converted Point, p, in client coordinates.</returns>
+		public Point PointToScreen(Point p)
+		{
+			return PointToScreen(Handle, p);
+		}
+
+		/// <summary>
+		/// Computes the location of the specified screen point into client coordinates.
+		/// </summary>
+		/// <param name="handle">The window handle.</param>
+		/// <param name="p">The screen coordinate Point to convert.</param>
+		/// <returns>A Point that represents the converted Point, p, in client coordinates.</returns>
+		public static Point PointToScreen(IntPtr handle, Point p)
+		{
+			if (handle == IntPtr.Zero) return p;
+
+			NativeMethods.ClientToScreen(handle, ref p);
 			return p;
 		}
 

@@ -73,16 +73,17 @@ namespace skwas.Forms
 		}
 
 		/// <summary>
-		/// Returns the coordinates of the upper-left corner of the window relative to the main desktop for specified handle.
+		/// Returns the coordinates of the upper-left corner of the window relative to the screen, or relative to specified window.
 		/// </summary>
 		/// <param name="window">The window handle.</param>
-		public static Point GetLocation(this IWin32Window window)
+		/// <param name="relativeTo">If a window is specified, returns the location relative to this window.</param>
+		public static Point GetLocation(this IWin32Window window, IWin32Window relativeTo = null)
 		{
-			return Window.GetLocation(window?.Handle ?? IntPtr.Zero);
+			return Window.GetLocation(window?.Handle ?? IntPtr.Zero, relativeTo?.Handle);
 		}
 
 		/// <summary>
-		/// Sets the coordinates of the upper-left corner of the window relative to the main desktop for specified handle.
+		/// Sets the coordinates of the upper-left corner of the window relative to the screen.
 		/// </summary>
 		/// <param name="window">The window handle.</param>
 		/// <param name="location">The new location.</param>
@@ -114,9 +115,10 @@ namespace skwas.Forms
 		/// Returns the bounds of the window for specified window handle.
 		/// </summary>
 		/// <param name="window">The window handle.</param>
-		public static Rectangle GetBounds(this IWin32Window window)
+		/// <param name="relativeTo">If a window is specified, returns the location relative to this window.</param>
+		public static Rectangle GetBounds(this IWin32Window window, IWin32Window relativeTo = null)
 		{
-			return Window.GetBounds(window?.Handle ?? IntPtr.Zero);
+			return Window.GetBounds(window?.Handle ?? IntPtr.Zero, relativeTo?.Handle);
 		}
 
 		/// <summary>
@@ -183,6 +185,28 @@ namespace skwas.Forms
 		public static string GetClassName(this IWin32Window window)
 		{
 			return Window.GetClassName(window?.Handle ?? IntPtr.Zero);
+		}
+
+		/// <summary>
+		/// Computes the location of the specified screen point into client coordinates.
+		/// </summary>
+		/// <param name="window">The window handle.</param>
+		/// <param name="p">The screen coordinate Point to convert.</param>
+		/// <returns>A Point that represents the converted Point, p, in client coordinates.</returns>
+		public static Point PointToClient(this IWin32Window window, Point p)
+		{
+			return Window.PointToClient(window?.Handle ?? IntPtr.Zero, p);
+		}
+
+		/// <summary>
+		/// Computes the location of the specified screen point into client coordinates.
+		/// </summary>
+		/// <param name="window">The window handle.</param>
+		/// <param name="p">The screen coordinate Point to convert.</param>
+		/// <returns>A Point that represents the converted Point, p, in client coordinates.</returns>
+		public static Point PointToScreen(this IWin32Window window, Point p)
+		{
+			return Window.PointToScreen(window?.Handle ?? IntPtr.Zero, p);
 		}
 	}
 }
